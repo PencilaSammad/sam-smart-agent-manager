@@ -35,6 +35,7 @@
             samMenu = new ToolStripDropDownButton();
             newSmartAgentToolStripMenuItem = new ToolStripMenuItem();
             loadSmartAgentToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             samTools.ContentPanel.SuspendLayout();
             samTools.TopToolStripPanel.SuspendLayout();
@@ -81,7 +82,7 @@
             // samMenu
             // 
             samMenu.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            samMenu.DropDownItems.AddRange(new ToolStripItem[] { newSmartAgentToolStripMenuItem, loadSmartAgentToolStripMenuItem, exitToolStripMenuItem });
+            samMenu.DropDownItems.AddRange(new ToolStripItem[] { newSmartAgentToolStripMenuItem, loadSmartAgentToolStripMenuItem, settingsToolStripMenuItem, exitToolStripMenuItem });
             samMenu.Image = (Image)resources.GetObject("samMenu.Image");
             samMenu.ImageScaling = ToolStripItemImageScaling.None;
             samMenu.ImageTransparentColor = Color.Magenta;
@@ -92,20 +93,28 @@
             // newSmartAgentToolStripMenuItem
             // 
             newSmartAgentToolStripMenuItem.Name = "newSmartAgentToolStripMenuItem";
-            newSmartAgentToolStripMenuItem.Size = new Size(169, 22);
+            newSmartAgentToolStripMenuItem.Size = new Size(180, 22);
             newSmartAgentToolStripMenuItem.Text = "New Smart Agent";
             newSmartAgentToolStripMenuItem.Click += newSmartAgentToolStripMenuItem_Click;
             // 
             // loadSmartAgentToolStripMenuItem
             // 
             loadSmartAgentToolStripMenuItem.Name = "loadSmartAgentToolStripMenuItem";
-            loadSmartAgentToolStripMenuItem.Size = new Size(169, 22);
+            loadSmartAgentToolStripMenuItem.Size = new Size(180, 22);
             loadSmartAgentToolStripMenuItem.Text = "Load Smart Agent";
+            loadSmartAgentToolStripMenuItem.Click += loadSmartAgentToolStripMenuItem_Click;
+            // 
+            // settingsToolStripMenuItem
+            // 
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(180, 22);
+            settingsToolStripMenuItem.Text = "Settings";
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(169, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -137,5 +146,6 @@
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanelSAM;
         private ToolStripMenuItem newSmartAgentToolStripMenuItem;
         private ToolStripMenuItem loadSmartAgentToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
     }
 }

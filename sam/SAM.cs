@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Drawing.Drawing2D;
 using System.Security.Policy;
 using WeifenLuo.WinFormsUI.Docking;
@@ -41,6 +42,52 @@ namespace sam
         {
             SmartAgent sam = new SmartAgent();
             sam.Show(dockPanelSAM);
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SamSettings sSettings = new SamSettings();
+            sSettings.Show();
+        }
+
+        private void loadSmartAgentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Create a new form to display the agent settings
+            SelectAgentSettings agentSettingsForm = new SelectAgentSettings();
+
+            // Deserialize the agent settings collection from application settings
+            List<AgentSettings> agentSettingsList = new List<AgentSettings>();
+            if (!string.IsNullOrEmpty(SamUserSettings.Default.AgentSettingsList))
+            {
+                agentSettingsList = JsonConvert.DeserializeObject<List<AgentSettings>>(SamUserSettings.Default.AgentSettingsList);
+            }
+
+            // If the collection is empty, show an error message and return
+            if (agentSettingsList == null || agentSettingsList.Count == 0)
+            {
+                MessageBox.Show("No agents saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Show the agent settings form to allow the user to select an agent
+            agentSettingsForm.AgentSettingsList = agentSettingsList;
+            DialogResult result = agentSettingsForm.ShowDialog();
+
+            // If the user clicks "Cancel", return
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // Get the selected agent settings object
+            AgentSettings selectedAgentSettings = agentSettingsForm.SelectedAgentSettings;
+
+            // Create a new SmartAgent form with the selected settings
+            SmartAgent smartAgent = new SmartAgent(selectedAgentSettings);
+
+            // Show the SmartAgent form
+            smartAgent.Show(dockPanelSAM);
+
         }
     }
 }

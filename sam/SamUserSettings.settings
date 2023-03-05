@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="sam" GeneratedClassName="SamUserSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GPT_API_KEY" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultAgentPersonality" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You are a helpful assistant.</Value>
+    </Setting>
+    <Setting Name="AgentSettingsList" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

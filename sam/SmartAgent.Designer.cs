@@ -127,6 +127,7 @@
             btnSaveAgent.TabIndex = 3;
             btnSaveAgent.Text = "Save";
             btnSaveAgent.UseVisualStyleBackColor = true;
+            btnSaveAgent.Click += btnSaveAgent_Click;
             // 
             // btnReset
             // 
@@ -280,6 +281,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SmartAgent";
             Text = "Smart Agent";
+            Load += SmartAgent_Load;
             agentContainer.Panel1.ResumeLayout(false);
             agentContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)agentContainer).EndInit();
