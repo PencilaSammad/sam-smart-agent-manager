@@ -48,11 +48,11 @@
             // samTools.ContentPanel
             // 
             samTools.ContentPanel.Controls.Add(dockPanelSAM);
-            samTools.ContentPanel.Size = new Size(800, 419);
+            samTools.ContentPanel.Size = new Size(1028, 570);
             samTools.Dock = DockStyle.Fill;
             samTools.Location = new Point(0, 0);
             samTools.Name = "samTools";
-            samTools.Size = new Size(800, 450);
+            samTools.Size = new Size(1028, 601);
             samTools.TabIndex = 0;
             samTools.Text = "toolStripContainer1";
             // 
@@ -65,16 +65,17 @@
             dockPanelSAM.Dock = DockStyle.Fill;
             dockPanelSAM.Location = new Point(0, 0);
             dockPanelSAM.Name = "dockPanelSAM";
-            dockPanelSAM.Size = new Size(800, 419);
+            dockPanelSAM.Size = new Size(1028, 570);
             dockPanelSAM.TabIndex = 0;
             // 
             // toolSAM
             // 
             toolSAM.Dock = DockStyle.None;
             toolSAM.Items.AddRange(new ToolStripItem[] { samMenu });
-            toolSAM.Location = new Point(3, 0);
+            toolSAM.Location = new Point(0, 0);
             toolSAM.Name = "toolSAM";
-            toolSAM.Size = new Size(49, 31);
+            toolSAM.Size = new Size(1028, 31);
+            toolSAM.Stretch = true;
             toolSAM.TabIndex = 0;
             // 
             // samMenu
@@ -91,20 +92,20 @@
             // newSmartAgentToolStripMenuItem
             // 
             newSmartAgentToolStripMenuItem.Name = "newSmartAgentToolStripMenuItem";
-            newSmartAgentToolStripMenuItem.Size = new Size(180, 22);
+            newSmartAgentToolStripMenuItem.Size = new Size(169, 22);
             newSmartAgentToolStripMenuItem.Text = "New Smart Agent";
             newSmartAgentToolStripMenuItem.Click += newSmartAgentToolStripMenuItem_Click;
             // 
             // loadSmartAgentToolStripMenuItem
             // 
             loadSmartAgentToolStripMenuItem.Name = "loadSmartAgentToolStripMenuItem";
-            loadSmartAgentToolStripMenuItem.Size = new Size(180, 22);
+            loadSmartAgentToolStripMenuItem.Size = new Size(169, 22);
             loadSmartAgentToolStripMenuItem.Text = "Load Smart Agent";
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(169, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -112,7 +113,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1028, 601);
             Controls.Add(samTools);
             Name = "SAM";
             StartPosition = FormStartPosition.CenterScreen;

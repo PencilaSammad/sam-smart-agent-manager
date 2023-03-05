@@ -10,7 +10,6 @@ namespace sam
         {
             InitializeComponent();
             dockPanelSAM.DocumentStyle = DocumentStyle.DockingWindow;
-            //dockPanel.DocumentTabStripLocation = DocumentTabStripLocation.Bottom;
 
             dockPanelSAM.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012LightTheme();
             DockPaneStripSkin dockPaneSkin = new DockPaneStripSkin();
@@ -26,6 +25,7 @@ namespace sam
             dockPaneSkin.DocumentGradient.InactiveTabGradient.StartColor = Color.Silver;
             dockPaneSkin.DocumentGradient.InactiveTabGradient.EndColor = Color.WhiteSmoke;
             dockPaneSkin.DocumentGradient.InactiveTabGradient.TextColor = Color.White;
+            dockPanelSAM.ShowDocumentIcon = true;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
