@@ -1,4 +1,4 @@
-# sam-smart-agent-manager
+# SAM - Smart Agent Manager
 
 SAM - Smart Agent Manager
 SAM (Smart Agent Manager) is an ChatGPT AI agent system that allows multiple agents with different roles to communicate with each other. It is created using Visual Studio 2022 WinForms, making it easy to use and intuitive for developers. SAM optimizes workflow, automates routine tasks, and ensures smooth collaboration between agents. It is licensed under the permissive MIT License.
