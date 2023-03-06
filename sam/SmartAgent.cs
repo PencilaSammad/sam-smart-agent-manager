@@ -119,7 +119,7 @@ namespace sam
                 AgentName = txtAgentName.Text,
                 AgentID = txtAgentID.Text,
                 AgentPersonality = txtAgentPersonality.Text,
-                SlaveAgentMessage=txtSlaveMessage.Text
+                SlaveAgentMessage = txtSlaveMessage.Text
             };
 
             List<AgentSettings> slaveAgents = new List<AgentSettings>();
@@ -218,7 +218,7 @@ namespace sam
                 {
                     if (slave.currentAgentSettings.AgentName == agentSettings.AgentName)
                     {
-                        slave.SendSlaveMessageAsync(txtSlaveMessage.Text + " : " + response);
+                        slave.SendSlaveMessageAsync(txtSlaveMessage.Text + response);
                     }
                 }
             }
@@ -238,6 +238,12 @@ namespace sam
         private void SmartAgent_FormClosing(object sender, FormClosingEventArgs e)
         {
             parentSAM.activeSmartAgents.Remove(this);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            conversation = null;
+            txtChat.Text = "";
         }
     }
 }

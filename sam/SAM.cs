@@ -91,8 +91,10 @@ namespace sam
 
             // Show the SmartAgent form
             smartAgent.Show(dockPanelSAM);
-
+           
            
         }
+
+       
     }
 }
