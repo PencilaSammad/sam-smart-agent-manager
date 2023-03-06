@@ -93,11 +93,11 @@ namespace sam
 
         private string GenerateRandomAgentName()
         {
-            // Create an array of ten possible agent name options
-            string[] agentNames = new string[] { "Alex", "Avery", "Brooke", "Cameron", "Dakota", "Jordan", "Morgan", "Riley", "Taylor", "Logan", "Evelyn", "Madison", "Peyton", "Sydney", "Bailey", "Reagan", "Charlie", "Hayden", "Harper", "Parker", "Ariel" };
+            // Create an array of twenty possible agent name options
+            string[] agentNames = new string[] { "Alex", "Avery", "Brooke", "Cameron", "Dakota", "Jordan", "Morgan", "Riley", "Taylor", "Logan", "Evelyn", "Madison", "Peyton", "Sydney", "Bailey", "Reagan", "Charlie", "Hayden", "Harper", "Parker", "Ariel", "Phoenix", "Rowan", "Sage", "Aspen", "Emerson", "Dallas", "Skyler", "Casey", "Kendall", "Cassidy" };
 
-            // Generate a random number between 0 and 9 to select a random agent name from the array
-            int index = new Random().Next(0, 10);
+            // Generate a random number between 0 and 19 to select a random agent name from the array
+            int index = new Random().Next(0, 20);
 
             // Return the selected agent name
             return agentNames[index];
