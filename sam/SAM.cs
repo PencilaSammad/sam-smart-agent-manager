@@ -7,7 +7,7 @@ namespace sam
 {
     public partial class SAM : Form
     {
-        public List<SmartAgent> activeSmartAgents { get; set; }= new List<SmartAgent>();
+        public List<SmartAgent> activeSmartAgents { get; set; } = new List<SmartAgent>();
 
         public SAM()
         {
@@ -42,7 +42,7 @@ namespace sam
 
         private void newSmartAgentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SmartAgent smartAgent = new SmartAgent(null,this);
+            SmartAgent smartAgent = new SmartAgent(null, this);
             activeSmartAgents.Add(smartAgent);
             smartAgent.Show(dockPanelSAM);
         }
@@ -91,10 +91,10 @@ namespace sam
 
             // Show the SmartAgent form
             smartAgent.Show(dockPanelSAM);
-           
-           
+
+
         }
 
-       
+
     }
 }

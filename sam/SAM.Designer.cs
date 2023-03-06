@@ -124,6 +124,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1179, 667);
             Controls.Add(samTools);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SAM";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SAM - Smart Agent Manager";
