@@ -28,30 +28,30 @@ namespace sam
             // Deserialize the agent settings collection from application settings
             // Retrieve existing agent settings from the settings field
             loadedAgentSettings = new List<AgentSettings>();
-            dynamic agentSettingsList = new List<AgentSettings>();
-            if (!string.IsNullOrEmpty(SamUserSettings.Default.AgentSettingsList))
-            {
-                agentSettingsList = JsonConvert.DeserializeObject(SamUserSettings.Default.AgentSettingsList);
-            }
+            AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
+
+            List<AgentSettings> agentSettingsList = agentSettingsManager.LoadAgentSettings();
 
 
             // Add each agent to the list box
-            foreach (var agent in agentSettingsList)
+            if (agentSettingsList != null)
             {
-                if (agent.AgentName != null) 
-                { 
-                    lbAgentList.Items.Add(agent.AgentName);
-                    // Create a new agent settings object
-                    AgentSettings agens = new AgentSettings
+                foreach (var agent in agentSettingsList)
+                {
+                    if (agent.AgentName != null)
                     {
-                        AgentName = agent.AgentName,
-                        AgentID = agent.AgentID,
-                        AgentPersonality = agent.AgentPersonality
-                    };
-                    loadedAgentSettings.Add(agens);
+                        lbAgentList.Items.Add(agent.AgentName);
+                        // Create a new agent settings object
+                        AgentSettings agens = new AgentSettings
+                        {
+                            AgentName = agent.AgentName,
+                            AgentID = agent.AgentID,
+                            AgentPersonality = agent.AgentPersonality
+                        };
+                        loadedAgentSettings.Add(agens);
+                    }
                 }
             }
-            
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -14,10 +14,13 @@ namespace sam
 {
     public partial class SmartAgent : DockContent
     {
+        public AgentSettings? currentAgentSettings { get; private set; }
+
         public SmartAgent(AgentSettings? selectedAgentSettings = null)
         {
             InitializeComponent();
-            if (selectedAgentSettings != null )
+
+            if (selectedAgentSettings != null)
             {
                 txtAgentPersonality.Text = selectedAgentSettings.AgentPersonality;
                 txtAgentName.Text = selectedAgentSettings.AgentName;
@@ -28,12 +31,54 @@ namespace sam
                 txtAgentPersonality.Text = SamUserSettings.Default.DefaultAgentPersonality;
                 txtAgentName.Text = GenerateRandomAgentName();
                 txtAgentID.Text = Guid.NewGuid().ToString();
+
+                // Create a new agent settings object
+                AgentSettings agentSettings = new AgentSettings
+                {
+                    AgentName = txtAgentName.Text,
+                    AgentID = txtAgentID.Text,
+                    AgentPersonality = txtAgentPersonality.Text,
+                    SlaveAgents = new List<AgentSettings> { }
+                };
+                selectedAgentSettings = agentSettings;
             }
+            this.currentAgentSettings = selectedAgentSettings;
+            LoadSlaveAgents();
+        }
+
+        private void LoadSlaveAgents()
+        {
+            AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
+
+            var slaveAgents = agentSettingsManager.LoadAgentSettings();
+            var agentSetting = agentSettingsManager.LoadAgentSetting(currentAgentSettings.AgentName);
+            if (slaveAgents != null)
+            {
+                foreach (var slaveAgent in slaveAgents)
+                {
+
+                    checkedListSelectedSlaves.Items.Add(slaveAgent.AgentName);
+                }
+                if (agentSetting.SlaveAgents != null)
+                {
+                    foreach (var agentSlave in agentSetting.SlaveAgents)
+                    {
+                        foreach (string chkItem in checkedListSelectedSlaves.Items)
+                        {
+                            if (agentSlave.AgentName == chkItem)
+                            {
+                                checkedListSelectedSlaves.SetItemChecked(checkedListSelectedSlaves.Items.IndexOf(chkItem), true);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         private void SmartAgent_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private string GenerateRandomAgentName()
@@ -55,6 +100,9 @@ namespace sam
 
         private void SaveAgentSettings()
         {
+
+            AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
+
             // Create a new agent settings object
             AgentSettings agentSettings = new AgentSettings
             {
@@ -62,36 +110,14 @@ namespace sam
                 AgentID = txtAgentID.Text,
                 AgentPersonality = txtAgentPersonality.Text
             };
-            List<AgentSettings> loadedAgentSettings = new List<AgentSettings>();
-            // Retrieve existing agent settings from the settings field
-            dynamic agentSettingsList = new List<AgentSettings>();
-            if (!string.IsNullOrEmpty(SamUserSettings.Default.AgentSettingsList))
-            {
-                agentSettingsList = JsonConvert.DeserializeObject(SamUserSettings.Default.AgentSettingsList);
-            }
 
-            // Add the new agent settings object to the collection
-            // Add each agent to the list box
-            foreach (var agent in agentSettingsList)
+            List<AgentSettings> slaveAgents = new List<AgentSettings>();
+            foreach (string slave in checkedListSelectedSlaves.CheckedItems)
             {
-                if (agent.AgentName != null)
-                {
-                    // Create a new agent settings object
-                    AgentSettings agens = new AgentSettings
-                    {
-                        AgentName = agent.AgentName,
-                        AgentID = agent.AgentID,
-                        AgentPersonality = agent.AgentPersonality
-                    };
-                    loadedAgentSettings.Add(agens);
-                }
+                slaveAgents.Add(agentSettingsManager.LoadAgentSetting(slave));
             }
-            loadedAgentSettings.Add(agentSettings);
-
-            // Serialize and save the updated agent settings collection to application settings
-            string serializedAgentSettings = JsonConvert.SerializeObject(loadedAgentSettings);
-            SamUserSettings.Default.AgentSettingsList = serializedAgentSettings;
-            SamUserSettings.Default.Save();
+            agentSettings.SlaveAgents = slaveAgents;
+            agentSettingsManager.SaveAgentSettings(agentSettings);
 
             MessageBox.Show("Agent settings saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

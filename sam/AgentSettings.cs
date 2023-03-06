@@ -1,9 +1,12 @@
 ﻿namespace sam
 {
+    
     public class AgentSettings
     {
-        public string AgentName { get; internal set; }
-        public string AgentID { get; internal set; }
-        public string AgentPersonality { get; internal set; }
+        public string AgentName { get; set; }
+        public string AgentID { get; set; }
+        public string AgentPersonality { get; set; }
+        public List<AgentSettings>? SlaveAgents { get; set; }
     }
+
 }
