@@ -61,15 +61,20 @@ namespace sam
                 }
                 if (agentSetting.SlaveAgents != null)
                 {
+                    var itemsToCheck = new List<object>(); // create a new list to hold the items that need to be checked
                     foreach (var agentSlave in agentSetting.SlaveAgents)
                     {
-                        foreach (string chkItem in checkedListSelectedSlaves.Items)
+                        foreach (var availableSlaves in checkedListSelectedSlaves.Items)
                         {
-                            if (agentSlave.AgentName == chkItem)
+                            if (agentSlave.AgentName == availableSlaves.ToString())
                             {
-                                checkedListSelectedSlaves.SetItemChecked(checkedListSelectedSlaves.Items.IndexOf(chkItem), true);
+                                itemsToCheck.Add(availableSlaves); // add the item to the list of items to check
                             }
                         }
+                    }
+                    foreach (var item in itemsToCheck)
+                    {
+                        checkedListSelectedSlaves.SetItemChecked(checkedListSelectedSlaves.Items.IndexOf(item), true); // check the items outside of the loop
                     }
                 }
             }
