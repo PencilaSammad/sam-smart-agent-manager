@@ -38,8 +38,7 @@
             groupBox2 = new GroupBox();
             textBox1 = new TextBox();
             grpAgentControl = new GroupBox();
-            btStartAgent = new Button();
-            btnStopAgent = new Button();
+            chkSmartAgentEnabled = new CheckBox();
             btnSaveAgent = new Button();
             btnReset = new Button();
             grpPersonality = new GroupBox();
@@ -124,7 +123,7 @@
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Location = new Point(6, 283);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(343, 231);
+            groupBox1.Size = new Size(343, 266);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Slave agent settings";
@@ -135,7 +134,7 @@
             groupBox3.Controls.Add(checkedListSelectedSlaves);
             groupBox3.Location = new Point(9, 22);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(325, 108);
+            groupBox3.Size = new Size(325, 143);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Slave agent names";
@@ -146,14 +145,14 @@
             checkedListSelectedSlaves.FormattingEnabled = true;
             checkedListSelectedSlaves.Location = new Point(3, 19);
             checkedListSelectedSlaves.Name = "checkedListSelectedSlaves";
-            checkedListSelectedSlaves.Size = new Size(319, 86);
+            checkedListSelectedSlaves.Size = new Size(319, 121);
             checkedListSelectedSlaves.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(textBox1);
-            groupBox2.Location = new Point(6, 136);
+            groupBox2.Location = new Point(6, 171);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(331, 85);
             groupBox2.TabIndex = 3;
@@ -172,43 +171,32 @@
             // grpAgentControl
             // 
             grpAgentControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            grpAgentControl.Controls.Add(btStartAgent);
-            grpAgentControl.Controls.Add(btnStopAgent);
+            grpAgentControl.Controls.Add(chkSmartAgentEnabled);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
-            grpAgentControl.Location = new Point(6, 520);
+            grpAgentControl.Location = new Point(6, 555);
             grpAgentControl.Name = "grpAgentControl";
-            grpAgentControl.Size = new Size(343, 108);
+            grpAgentControl.Size = new Size(343, 73);
             grpAgentControl.TabIndex = 5;
             grpAgentControl.TabStop = false;
             grpAgentControl.Text = "Agent control";
             // 
-            // btStartAgent
+            // chkSmartAgentEnabled
             // 
-            btStartAgent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btStartAgent.Location = new Point(256, 22);
-            btStartAgent.Name = "btStartAgent";
-            btStartAgent.Size = new Size(78, 80);
-            btStartAgent.TabIndex = 6;
-            btStartAgent.Text = "Start agent";
-            btStartAgent.UseVisualStyleBackColor = true;
-            // 
-            // btnStopAgent
-            // 
-            btnStopAgent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnStopAgent.Location = new Point(172, 22);
-            btnStopAgent.Name = "btnStopAgent";
-            btnStopAgent.Size = new Size(78, 80);
-            btnStopAgent.TabIndex = 5;
-            btnStopAgent.Text = "Stop Agent";
-            btnStopAgent.UseVisualStyleBackColor = true;
+            chkSmartAgentEnabled.AutoSize = true;
+            chkSmartAgentEnabled.Location = new Point(196, 35);
+            chkSmartAgentEnabled.Name = "chkSmartAgentEnabled";
+            chkSmartAgentEnabled.Size = new Size(135, 19);
+            chkSmartAgentEnabled.TabIndex = 7;
+            chkSmartAgentEnabled.Text = "Smart agent enabled";
+            chkSmartAgentEnabled.UseVisualStyleBackColor = true;
             // 
             // btnSaveAgent
             // 
             btnSaveAgent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSaveAgent.Location = new Point(6, 22);
+            btnSaveAgent.Location = new Point(6, 20);
             btnSaveAgent.Name = "btnSaveAgent";
-            btnSaveAgent.Size = new Size(78, 80);
+            btnSaveAgent.Size = new Size(78, 47);
             btnSaveAgent.TabIndex = 3;
             btnSaveAgent.Text = "Save";
             btnSaveAgent.UseVisualStyleBackColor = true;
@@ -217,9 +205,9 @@
             // btnReset
             // 
             btnReset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnReset.Location = new Point(88, 22);
+            btnReset.Location = new Point(88, 20);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(78, 80);
+            btnReset.Size = new Size(78, 47);
             btnReset.TabIndex = 4;
             btnReset.Text = "Reset";
             btnReset.UseVisualStyleBackColor = true;
@@ -313,6 +301,7 @@
             btnSend.TabIndex = 1;
             btnSend.Text = "Send";
             btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // txtUserInput
             // 
@@ -378,6 +367,7 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             grpAgentControl.ResumeLayout(false);
+            grpAgentControl.PerformLayout();
             grpPersonality.ResumeLayout(false);
             grpPersonality.PerformLayout();
             grpAgentID.ResumeLayout(false);
@@ -413,12 +403,11 @@
         private Button btnReset;
         private Button btnSaveAgent;
         private GroupBox grpAgentControl;
-        private Button btStartAgent;
-        private Button btnStopAgent;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private TextBox textBox1;
         private GroupBox groupBox3;
         private CheckedListBox checkedListSelectedSlaves;
+        private CheckBox chkSmartAgentEnabled;
     }
 }

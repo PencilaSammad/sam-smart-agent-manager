@@ -15,6 +15,7 @@ namespace sam
     public partial class SmartAgent : DockContent
     {
         public AgentSettings? currentAgentSettings { get; private set; }
+        internal Conversation conversation { get; private set; }
 
         public SmartAgent(AgentSettings? selectedAgentSettings = null)
         {
@@ -125,6 +126,69 @@ namespace sam
             agentSettingsManager.SaveAgentSettings(agentSettings);
 
             MessageBox.Show("Agent settings saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            SendUserConversationMessageAsync();
+            
+        }
+
+        private void AppendTextToChat(string text, Color color)
+        {
+            // Set the color of the text that will be appended
+            txtChat.SelectionColor = color;
+
+            // Append the text to the control
+            txtChat.AppendText(text);
+
+            // Add a new line
+            txtChat.AppendText(Environment.NewLine);
+            txtChat.AppendText(Environment.NewLine);
+        }
+
+        private async Task SendUserConversationMessageAsync()
+        {
+            if (conversation == null)
+            {
+                List<string> systemPersonality = new List<string> { };
+
+                systemPersonality.Add(txtAgentPersonality.Text);
+
+                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality);
+                if (txtUserInput.Text != "")
+                {
+                    string userInput = txtUserInput.Text;
+
+                    // Append the user's input to the chat with green text
+                    AppendTextToChat(userInput, Color.Green);
+
+                    // Start the conversation and append the system's response with blue text
+                    string response = await conversation.StartConversation(userInput);
+                    AppendTextToChat(response, Color.Blue);
+
+                    // Clear the user input field
+                    txtUserInput.Text = "";
+                };
+
+            }
+            else
+            {
+                if (txtUserInput.Text != "")
+                {
+                    string userInput = txtUserInput.Text;
+
+                    // Append the user's input to the chat with green text
+                    AppendTextToChat(userInput, Color.Green);
+
+                    // Start the conversation and append the system's response with blue text
+                    string response = await conversation.StartConversation(userInput);
+                    AppendTextToChat(response, Color.Blue);
+
+                    // Clear the user input field
+                    txtUserInput.Text = "";
+                };
+            }
         }
     }
 }
