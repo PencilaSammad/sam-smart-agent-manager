@@ -7,6 +7,7 @@
         public string AgentID { get; set; }
         public string AgentPersonality { get; set; }
         public List<AgentSettings>? SlaveAgents { get; set; }
+        public string SlaveAgentMessage { get; set; }
     }
 
 }

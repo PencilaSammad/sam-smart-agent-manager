@@ -16,16 +16,18 @@ namespace sam
     {
         public AgentSettings? currentAgentSettings { get; private set; }
         internal Conversation conversation { get; private set; }
+        public SAM parentSAM { get; }
 
-        public SmartAgent(AgentSettings? selectedAgentSettings = null)
+        public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
         {
             InitializeComponent();
-
+            parentSAM = sAM;
             if (selectedAgentSettings != null)
             {
                 txtAgentPersonality.Text = selectedAgentSettings.AgentPersonality;
                 txtAgentName.Text = selectedAgentSettings.AgentName;
                 txtAgentID.Text = selectedAgentSettings.AgentID;
+                txtSlaveMessage.Text = selectedAgentSettings.SlaveAgentMessage;
             }
             else
             {
@@ -39,7 +41,9 @@ namespace sam
                     AgentName = txtAgentName.Text,
                     AgentID = txtAgentID.Text,
                     AgentPersonality = txtAgentPersonality.Text,
-                    SlaveAgents = new List<AgentSettings> { }
+                    SlaveAgents = new List<AgentSettings> { },
+                    SlaveAgentMessage = txtSlaveMessage.Text
+
                 };
                 selectedAgentSettings = agentSettings;
             }
@@ -114,7 +118,8 @@ namespace sam
             {
                 AgentName = txtAgentName.Text,
                 AgentID = txtAgentID.Text,
-                AgentPersonality = txtAgentPersonality.Text
+                AgentPersonality = txtAgentPersonality.Text,
+                SlaveAgentMessage=txtSlaveMessage.Text
             };
 
             List<AgentSettings> slaveAgents = new List<AgentSettings>();
@@ -131,7 +136,7 @@ namespace sam
         private void btnSend_Click(object sender, EventArgs e)
         {
             SendUserConversationMessageAsync();
-            
+
         }
 
         private void AppendTextToChat(string text, Color color)
@@ -156,6 +161,7 @@ namespace sam
                 systemPersonality.Add(txtAgentPersonality.Text);
 
                 conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality);
+
                 if (txtUserInput.Text != "")
                 {
                     string userInput = txtUserInput.Text;
@@ -166,6 +172,10 @@ namespace sam
                     // Start the conversation and append the system's response with blue text
                     string response = await conversation.StartConversation(userInput);
                     AppendTextToChat(response, Color.Blue);
+                    if (chkSmartAgentEnabled.Checked)
+                    {
+                        SendSmartAgentResponseToSlaves(response);
+                    }
 
                     // Clear the user input field
                     txtUserInput.Text = "";
@@ -184,11 +194,50 @@ namespace sam
                     // Start the conversation and append the system's response with blue text
                     string response = await conversation.StartConversation(userInput);
                     AppendTextToChat(response, Color.Blue);
-
+                    if (chkSmartAgentEnabled.Checked)
+                    {
+                        SendSmartAgentResponseToSlaves(response);
+                    }
                     // Clear the user input field
                     txtUserInput.Text = "";
                 };
             }
+        }
+
+        private void SendSmartAgentResponseToSlaves(string response)
+        {
+            AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
+            List<AgentSettings> slaveAgents = new List<AgentSettings>();
+            foreach (string slave in checkedListSelectedSlaves.CheckedItems)
+            {
+                slaveAgents.Add(agentSettingsManager.LoadAgentSetting(slave));
+            }
+            foreach (SmartAgent slave in parentSAM.activeSmartAgents)
+            {
+                foreach (AgentSettings agentSettings in slaveAgents)
+                {
+                    if (slave.currentAgentSettings.AgentName == agentSettings.AgentName)
+                    {
+                        slave.SendSlaveMessageAsync(txtSlaveMessage.Text + " : " + response);
+                    }
+                }
+            }
+
+
+        }
+
+        private async Task SendSlaveMessageAsync(string slaveMessage)
+        {
+            if (chkSmartAgentEnabled.Checked)
+            {
+                txtUserInput.Text = slaveMessage;
+                await SendUserConversationMessageAsync();
+            }
+        }
+
+        private void SmartAgent_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            parentSAM.activeSmartAgents.Remove(this);
         }
     }
 }

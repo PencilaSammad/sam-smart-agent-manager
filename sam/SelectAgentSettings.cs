@@ -46,7 +46,9 @@ namespace sam
                         {
                             AgentName = agent.AgentName,
                             AgentID = agent.AgentID,
-                            AgentPersonality = agent.AgentPersonality
+                            AgentPersonality = agent.AgentPersonality,
+                            SlaveAgentMessage=agent.SlaveAgentMessage
+                            
                         };
                         loadedAgentSettings.Add(agens);
                     }

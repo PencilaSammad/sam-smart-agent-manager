@@ -36,7 +36,7 @@
             groupBox3 = new GroupBox();
             checkedListSelectedSlaves = new CheckedListBox();
             groupBox2 = new GroupBox();
-            textBox1 = new TextBox();
+            txtSlaveMessage = new TextBox();
             grpAgentControl = new GroupBox();
             chkSmartAgentEnabled = new CheckBox();
             btnSaveAgent = new Button();
@@ -151,7 +151,7 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(txtSlaveMessage);
             groupBox2.Location = new Point(6, 171);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(331, 85);
@@ -159,14 +159,14 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Message to slave agent";
             // 
-            // textBox1
+            // txtSlaveMessage
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(3, 19);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(325, 63);
-            textBox1.TabIndex = 1;
+            txtSlaveMessage.Dock = DockStyle.Fill;
+            txtSlaveMessage.Location = new Point(3, 19);
+            txtSlaveMessage.Multiline = true;
+            txtSlaveMessage.Name = "txtSlaveMessage";
+            txtSlaveMessage.Size = new Size(325, 63);
+            txtSlaveMessage.TabIndex = 1;
             // 
             // grpAgentControl
             // 
@@ -184,7 +184,7 @@
             // chkSmartAgentEnabled
             // 
             chkSmartAgentEnabled.AutoSize = true;
-            chkSmartAgentEnabled.Location = new Point(196, 35);
+            chkSmartAgentEnabled.Location = new Point(172, 35);
             chkSmartAgentEnabled.Name = "chkSmartAgentEnabled";
             chkSmartAgentEnabled.Size = new Size(135, 19);
             chkSmartAgentEnabled.TabIndex = 7;
@@ -355,6 +355,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SmartAgent";
             Text = "Smart Agent";
+            FormClosing += SmartAgent_FormClosing;
             Load += SmartAgent_Load;
             agentContainer.Panel1.ResumeLayout(false);
             agentContainer.Panel2.ResumeLayout(false);
@@ -405,7 +406,7 @@
         private GroupBox grpAgentControl;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private TextBox textBox1;
+        private TextBox txtSlaveMessage;
         private GroupBox groupBox3;
         private CheckedListBox checkedListSelectedSlaves;
         private CheckBox chkSmartAgentEnabled;

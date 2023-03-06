@@ -7,6 +7,8 @@ namespace sam
 {
     public partial class SAM : Form
     {
+        public List<SmartAgent> activeSmartAgents { get; set; }= new List<SmartAgent>();
+
         public SAM()
         {
             InitializeComponent();
@@ -40,8 +42,9 @@ namespace sam
 
         private void newSmartAgentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SmartAgent sam = new SmartAgent();
-            sam.Show(dockPanelSAM);
+            SmartAgent smartAgent = new SmartAgent(null,this);
+            activeSmartAgents.Add(smartAgent);
+            smartAgent.Show(dockPanelSAM);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,11 +86,13 @@ namespace sam
             AgentSettings selectedAgentSettings = agentSettingsForm.SelectedAgentSettings;
 
             // Create a new SmartAgent form with the selected settings
-            SmartAgent smartAgent = new SmartAgent(selectedAgentSettings);
+            SmartAgent smartAgent = new SmartAgent(selectedAgentSettings, this);
+            activeSmartAgents.Add(smartAgent);
 
             // Show the SmartAgent form
             smartAgent.Show(dockPanelSAM);
 
+           
         }
     }
 }

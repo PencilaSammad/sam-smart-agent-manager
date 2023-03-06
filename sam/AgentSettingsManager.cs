@@ -45,6 +45,7 @@ namespace sam
                 agents.Find(x => x.AgentName == agentSetting.AgentName).AgentName = agentSetting.AgentName;
                 agents.Find(x => x.AgentName == agentSetting.AgentName).AgentPersonality = agentSetting.AgentPersonality;
                 agents.Find(x => x.AgentName == agentSetting.AgentName).SlaveAgents = agentSetting.SlaveAgents;
+                agents.Find(x => x.AgentName == agentSetting.AgentName).SlaveAgentMessage = agentSetting.SlaveAgentMessage;
                 // Serialize the agent settings list to JSON
                 string agentSettingsJson = JsonConvert.SerializeObject(agents);
 
