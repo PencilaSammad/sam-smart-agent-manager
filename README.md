@@ -30,7 +30,7 @@ If you would like to contribute to SAM, please fork the repository and submit a 
 
 5. Agent Control - This section provides the user with some controls over the GPT agent. The Save Settings button saves the current settings, and the Reset Conversation button clears the current conversation.
 
-6. Smart Agent Enabled - This setting allows the message forwarding to slave agents based on the defined rules.
+6. Smart Agent Enabled - This setting allows the message forwarding to slave agents based on the defined rules. This also prevents slave agent handling the message if it is not checked. By unchecking this you can prevent infinite ChatGPT loops.
 
 7. Conversation Panel - This panel displays the entire chat conversation between the user and the GPT agent. It provides the user with a view of all the messages exchanged, including the ones forwarded to a slave agent.
 
