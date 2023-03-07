@@ -19,3 +19,4 @@ SAM is licensed under the permissive MIT License. See the LICENSE file for more 
 
 Contributing
 If you would like to contribute to SAM, please fork the repository and submit a pull request. We welcome contributions from the community and are always looking for ways to improve SAM.
+![image](https://user-images.githubusercontent.com/167311/223538270-7d3de6cd-98c7-49f1-a7dd-4ce98b7307c3.png)
