@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,6 +44,65 @@ namespace sam
             SamUserSettings.Default.Save();
             txtApiKey.Text = "";
             txtAgentPersonality.Text = "";
+        }
+        public List<(string, string)> DownloadAndParseCsv(string agents)
+        {
+            // Get the path of the CSV file in the same directory as the executable
+            string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string csvPath = Path.Combine(exePath, agents);
+
+            // Load the CSV file
+            List<(string, string)> prompts = new List<(string, string)>();
+            using (TextFieldParser parser = new TextFieldParser(csvPath))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(",");
+                parser.HasFieldsEnclosedInQuotes = true;
+
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    if (fields.Length >= 2)
+                    {
+                        string act = fields[0].Trim().Trim('"');
+                        string prompt = fields[1].Trim().Trim('"').Replace("\\,", ",");
+                        prompts.Add((act, prompt));
+                    }
+                }
+            }
+
+            return prompts;
+        }
+        private void btnLoadDefault_Click(object sender, EventArgs e)
+        {
+            if (SamUserSettings.Default.AgentSettingsFileLocation != null)
+            {
+                // Call the function to download and parse the CSV file
+                List<(string, string)> prompts = DownloadAndParseCsv(SamUserSettings.Default.AgentSettingsFileLocation);
+
+                // Print out the list of prompts
+                foreach ((string act, string prompt) in prompts)
+                {
+                    AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
+
+                    // Create a new agent settings object
+                    if (act != "act")
+                    {
+                        AgentSettings agentSettings = new AgentSettings
+                        {
+                            AgentName = act,
+                            AgentID = Guid.NewGuid().ToString(),
+                            AgentPersonality = prompt,
+                            SlaveAgentMessage = ""
+                        };
+                        List<AgentSettings> slaveAgents = new List<AgentSettings>();
+                        agentSettings.SlaveAgents = slaveAgents;
+                        agentSettingsManager.SaveAgentSettings(agentSettings);
+                    }
+                }
+                MessageBox.Show("Default agents loaded.");
+            }
+
         }
     }
 }

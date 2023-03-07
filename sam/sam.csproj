@@ -37,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="default_agents.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SamUserSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>SamUserSettings.Designer.cs</LastGenOutput>

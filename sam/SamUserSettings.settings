@@ -11,5 +11,8 @@
     <Setting Name="AgentSettingsList" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="AgentSettingsFileLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">default_agents.csv</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

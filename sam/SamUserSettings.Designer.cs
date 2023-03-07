@@ -58,5 +58,17 @@ namespace sam {
                 this["AgentSettingsList"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("default_agents.csv")]
+        public string AgentSettingsFileLocation {
+            get {
+                return ((string)(this["AgentSettingsFileLocation"]));
+            }
+            set {
+                this["AgentSettingsFileLocation"] = value;
+            }
+        }
     }
 }

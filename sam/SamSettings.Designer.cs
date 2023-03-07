@@ -34,6 +34,7 @@
             grpPersonality = new GroupBox();
             txtAgentPersonality = new TextBox();
             grpAgentControl = new GroupBox();
+            btnLoadDefault = new Button();
             btnSaveAgent = new Button();
             btnReset = new Button();
             grpAPI.SuspendLayout();
@@ -84,6 +85,7 @@
             // grpAgentControl
             // 
             grpAgentControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAgentControl.Controls.Add(btnLoadDefault);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
             grpAgentControl.Location = new Point(12, 308);
@@ -92,6 +94,17 @@
             grpAgentControl.TabIndex = 6;
             grpAgentControl.TabStop = false;
             grpAgentControl.Text = "Settings control";
+            // 
+            // btnLoadDefault
+            // 
+            btnLoadDefault.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLoadDefault.Location = new Point(174, 22);
+            btnLoadDefault.Name = "btnLoadDefault";
+            btnLoadDefault.Size = new Size(148, 80);
+            btnLoadDefault.TabIndex = 5;
+            btnLoadDefault.Text = "Load default agents";
+            btnLoadDefault.UseVisualStyleBackColor = true;
+            btnLoadDefault.Click += btnLoadDefault_Click;
             // 
             // btnSaveAgent
             // 
@@ -147,5 +160,6 @@
         private GroupBox grpAgentControl;
         private Button btnSaveAgent;
         private Button btnReset;
+        private Button btnLoadDefault;
     }
 }
