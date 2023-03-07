@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartAgent));
             agentContainer = new SplitContainer();
             agentSettingsGrp = new GroupBox();
@@ -47,13 +48,19 @@
             txtAgentID = new TextBox();
             grpName = new GroupBox();
             txtAgentName = new TextBox();
+            tabDialogs = new TabControl();
+            tabPageText = new TabPage();
+            agentConversation = new GroupBox();
+            conversationContentPanel = new Panel();
+            txtChat = new RichTextBox();
+            tabPageCode = new TabPage();
+            groupBox4 = new GroupBox();
+            panel1 = new Panel();
+            txtCode = new FastColoredTextBoxNS.FastColoredTextBox();
             grpUserInput = new GroupBox();
             pnlInput = new Panel();
             btnSend = new Button();
             txtUserInput = new TextBox();
-            agentConversation = new GroupBox();
-            conversationContentPanel = new Panel();
-            txtChat = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)agentContainer).BeginInit();
             agentContainer.Panel1.SuspendLayout();
             agentContainer.Panel2.SuspendLayout();
@@ -67,10 +74,16 @@
             grpPersonality.SuspendLayout();
             grpAgentID.SuspendLayout();
             grpName.SuspendLayout();
-            grpUserInput.SuspendLayout();
-            pnlInput.SuspendLayout();
+            tabDialogs.SuspendLayout();
+            tabPageText.SuspendLayout();
             agentConversation.SuspendLayout();
             conversationContentPanel.SuspendLayout();
+            tabPageCode.SuspendLayout();
+            groupBox4.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtCode).BeginInit();
+            grpUserInput.SuspendLayout();
+            pnlInput.SuspendLayout();
             SuspendLayout();
             // 
             // agentContainer
@@ -85,8 +98,8 @@
             // 
             // agentContainer.Panel2
             // 
+            agentContainer.Panel2.Controls.Add(tabDialogs);
             agentContainer.Panel2.Controls.Add(grpUserInput);
-            agentContainer.Panel2.Controls.Add(agentConversation);
             agentContainer.Size = new Size(1036, 653);
             agentContainer.SplitterDistance = 361;
             agentContainer.TabIndex = 0;
@@ -271,6 +284,118 @@
             txtAgentName.Size = new Size(337, 23);
             txtAgentName.TabIndex = 1;
             // 
+            // tabDialogs
+            // 
+            tabDialogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabDialogs.Controls.Add(tabPageText);
+            tabDialogs.Controls.Add(tabPageCode);
+            tabDialogs.Location = new Point(6, 3);
+            tabDialogs.Name = "tabDialogs";
+            tabDialogs.SelectedIndex = 0;
+            tabDialogs.Size = new Size(659, 530);
+            tabDialogs.TabIndex = 2;
+            // 
+            // tabPageText
+            // 
+            tabPageText.Controls.Add(agentConversation);
+            tabPageText.Location = new Point(4, 24);
+            tabPageText.Name = "tabPageText";
+            tabPageText.Padding = new Padding(3);
+            tabPageText.Size = new Size(651, 502);
+            tabPageText.TabIndex = 0;
+            tabPageText.Text = "Text";
+            tabPageText.UseVisualStyleBackColor = true;
+            // 
+            // agentConversation
+            // 
+            agentConversation.Controls.Add(conversationContentPanel);
+            agentConversation.Dock = DockStyle.Fill;
+            agentConversation.Location = new Point(3, 3);
+            agentConversation.Name = "agentConversation";
+            agentConversation.Size = new Size(645, 496);
+            agentConversation.TabIndex = 0;
+            agentConversation.TabStop = false;
+            agentConversation.Text = "Conversation";
+            // 
+            // conversationContentPanel
+            // 
+            conversationContentPanel.AutoScroll = true;
+            conversationContentPanel.Controls.Add(txtChat);
+            conversationContentPanel.Dock = DockStyle.Fill;
+            conversationContentPanel.Location = new Point(3, 19);
+            conversationContentPanel.Name = "conversationContentPanel";
+            conversationContentPanel.Size = new Size(639, 474);
+            conversationContentPanel.TabIndex = 0;
+            // 
+            // txtChat
+            // 
+            txtChat.BackColor = Color.White;
+            txtChat.BorderStyle = BorderStyle.None;
+            txtChat.Dock = DockStyle.Fill;
+            txtChat.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtChat.Location = new Point(0, 0);
+            txtChat.Name = "txtChat";
+            txtChat.ReadOnly = true;
+            txtChat.Size = new Size(639, 474);
+            txtChat.TabIndex = 0;
+            txtChat.Text = "";
+            // 
+            // tabPageCode
+            // 
+            tabPageCode.Controls.Add(groupBox4);
+            tabPageCode.Location = new Point(4, 24);
+            tabPageCode.Name = "tabPageCode";
+            tabPageCode.Padding = new Padding(3);
+            tabPageCode.Size = new Size(651, 502);
+            tabPageCode.TabIndex = 1;
+            tabPageCode.Text = "Code";
+            tabPageCode.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(panel1);
+            groupBox4.Dock = DockStyle.Fill;
+            groupBox4.Location = new Point(3, 3);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(645, 496);
+            groupBox4.TabIndex = 1;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Code";
+            // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.Controls.Add(txtCode);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 19);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(639, 474);
+            panel1.TabIndex = 0;
+            // 
+            // txtCode
+            // 
+            txtCode.AllowSeveralTextStyleDrawing = true;
+            txtCode.AutoCompleteBracketsList = (new char[] { '(', ')', '{', '}', '[', ']', '"', '"', '\'', '\'' });
+            txtCode.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
+            txtCode.AutoScrollMinSize = new Size(27, 14);
+            txtCode.BackBrush = null;
+            txtCode.CharHeight = 14;
+            txtCode.CharWidth = 8;
+            txtCode.DefaultMarkerSize = 8;
+            txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
+            txtCode.Dock = DockStyle.Fill;
+            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCode.IsReplaceMode = false;
+            txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
+            txtCode.Location = new Point(0, 0);
+            txtCode.Name = "txtCode";
+            txtCode.Paddings = new Padding(0);
+            txtCode.SelectionColor = Color.FromArgb(60, 0, 0, 255);
+            txtCode.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("txtCode.ServiceColors");
+            txtCode.Size = new Size(639, 474);
+            txtCode.TabIndex = 0;
+            txtCode.Zoom = 100;
+            // 
             // grpUserInput
             // 
             grpUserInput.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -308,43 +433,12 @@
             // 
             txtUserInput.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtUserInput.BackColor = Color.White;
+            txtUserInput.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtUserInput.Location = new Point(3, 3);
             txtUserInput.Multiline = true;
             txtUserInput.Name = "txtUserInput";
             txtUserInput.Size = new Size(572, 80);
             txtUserInput.TabIndex = 0;
-            // 
-            // agentConversation
-            // 
-            agentConversation.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            agentConversation.Controls.Add(conversationContentPanel);
-            agentConversation.Location = new Point(3, 0);
-            agentConversation.Name = "agentConversation";
-            agentConversation.Size = new Size(665, 533);
-            agentConversation.TabIndex = 0;
-            agentConversation.TabStop = false;
-            agentConversation.Text = "Conversation";
-            // 
-            // conversationContentPanel
-            // 
-            conversationContentPanel.AutoScroll = true;
-            conversationContentPanel.Controls.Add(txtChat);
-            conversationContentPanel.Dock = DockStyle.Fill;
-            conversationContentPanel.Location = new Point(3, 19);
-            conversationContentPanel.Name = "conversationContentPanel";
-            conversationContentPanel.Size = new Size(659, 511);
-            conversationContentPanel.TabIndex = 0;
-            // 
-            // txtChat
-            // 
-            txtChat.BackColor = Color.White;
-            txtChat.Dock = DockStyle.Fill;
-            txtChat.Location = new Point(0, 0);
-            txtChat.Name = "txtChat";
-            txtChat.ReadOnly = true;
-            txtChat.Size = new Size(659, 511);
-            txtChat.TabIndex = 0;
-            txtChat.Text = "";
             // 
             // SmartAgent
             // 
@@ -376,11 +470,17 @@
             grpAgentID.PerformLayout();
             grpName.ResumeLayout(false);
             grpName.PerformLayout();
+            tabDialogs.ResumeLayout(false);
+            tabPageText.ResumeLayout(false);
+            agentConversation.ResumeLayout(false);
+            conversationContentPanel.ResumeLayout(false);
+            tabPageCode.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtCode).EndInit();
             grpUserInput.ResumeLayout(false);
             pnlInput.ResumeLayout(false);
             pnlInput.PerformLayout();
-            agentConversation.ResumeLayout(false);
-            conversationContentPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -411,5 +511,11 @@
         private GroupBox groupBox3;
         private CheckedListBox checkedListSelectedSlaves;
         private CheckBox chkSmartAgentEnabled;
+        private TabControl tabDialogs;
+        private TabPage tabPageText;
+        private TabPage tabPageCode;
+        private GroupBox groupBox4;
+        private Panel panel1;
+        private FastColoredTextBoxNS.FastColoredTextBox txtCode;
     }
 }

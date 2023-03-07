@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FastColoredTextBoxNS;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -17,6 +19,7 @@ namespace sam
         public AgentSettings? currentAgentSettings { get; private set; }
         internal Conversation conversation { get; private set; }
         public SAM parentSAM { get; }
+
 
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
         {
@@ -146,10 +149,15 @@ namespace sam
 
             // Append the text to the control
             txtChat.AppendText(text);
+            txtCode.AppendText(text);
 
             // Add a new line
             txtChat.AppendText(Environment.NewLine);
             txtChat.AppendText(Environment.NewLine);
+
+            // Add a new line
+            txtCode.AppendText(Environment.NewLine);
+            txtCode.AppendText(Environment.NewLine);
         }
 
         private async Task SendUserConversationMessageAsync()
@@ -170,8 +178,12 @@ namespace sam
                     AppendTextToChat(userInput, Color.Green);
 
                     // Start the conversation and append the system's response with blue text
-                    string response = await conversation.StartConversation(userInput);
-                    AppendTextToChat(response, Color.Blue);
+                    List<string> response = await conversation.StartConversation(userInput);
+                    foreach (string s in response)
+                    {
+                        AppendTextToChat(s, Color.Blue);
+                    }
+
                     if (chkSmartAgentEnabled.Checked)
                     {
                         SendSmartAgentResponseToSlaves(response);
@@ -192,8 +204,12 @@ namespace sam
                     AppendTextToChat(userInput, Color.Green);
 
                     // Start the conversation and append the system's response with blue text
-                    string response = await conversation.StartConversation(userInput);
-                    AppendTextToChat(response, Color.Blue);
+                    List<string> response = await conversation.StartConversation(userInput);
+                    foreach (string s in response)
+                    {
+                        AppendTextToChat(s, Color.Blue);
+                    }
+
                     if (chkSmartAgentEnabled.Checked)
                     {
                         SendSmartAgentResponseToSlaves(response);
@@ -204,7 +220,7 @@ namespace sam
             }
         }
 
-        private void SendSmartAgentResponseToSlaves(string response)
+        private void SendSmartAgentResponseToSlaves(List<string> response)
         {
             AgentSettingsManager agentSettingsManager = new AgentSettingsManager();
             List<AgentSettings> slaveAgents = new List<AgentSettings>();
@@ -218,7 +234,7 @@ namespace sam
                 {
                     if (slave.currentAgentSettings.AgentName == agentSettings.AgentName)
                     {
-                        slave.SendSlaveMessageAsync(txtSlaveMessage.Text + response);
+                        slave.SendSlaveMessageAsync(txtSlaveMessage.Text + String.Join(" ", response));
                     }
                 }
             }
@@ -244,6 +260,10 @@ namespace sam
         {
             conversation = null;
             txtChat.Text = "";
+            txtCode.SelectAll();
+            txtCode.Clear();
+
         }
+       
     }
 }

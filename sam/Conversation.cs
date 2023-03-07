@@ -31,9 +31,10 @@ namespace sam
         }
 
         // Method to start a conversation by taking a user's input and returning a response.
-        public async Task<string> StartConversation(string userInput)
+        public async Task<List<string>> StartConversation(string userInput)
         {
-            string convResponse = "Sorry, I don't understand.";
+            List<string> convResponse = new List<string> { };
+            convResponse.Add("Sorry, I don't understand.");
             List<ChatMessage> convMessages = new List<ChatMessage> { };
 
             // Add system personality to conversation
@@ -64,11 +65,14 @@ namespace sam
             // If successful, return the response and add it to the chat history
             if (completionResult.Successful)
             {
-                convResponse = completionResult.Choices.First().Message.Content;
-
-                ChatMessage npcmessage = new ChatMessage("assistant", convResponse);
-                chatHistory.Add(npcmessage);
-
+                convResponse.Clear();
+                foreach(var choises in completionResult.Choices)
+                {
+                    convResponse.Add(choises.Message.Content);
+                    ChatMessage npcmessage = new ChatMessage("assistant", choises.Message.Content);
+                    chatHistory.Add(npcmessage);
+                }
+                
                 return convResponse;
             }
 
