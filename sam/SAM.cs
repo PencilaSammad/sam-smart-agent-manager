@@ -13,10 +13,10 @@ namespace sam
         private WaveFileWriter writer;
         private WasapiLoopbackCapture capture;
         public List<SmartAgent> activeSmartAgents { get; set; } = new List<SmartAgent>();
-        private WaveFileWriter computerAudioWriter;
-        private WaveFileWriter micWriter;
         private WasapiLoopbackCapture computerAudioCapture;
-        private WaveInEvent micCapture;
+        private WaveFileWriter computerAudioWriter;
+        private List<WaveInEvent> micCaptures = new List<WaveInEvent>();
+        private List<WaveFileWriter> micWriters = new List<WaveFileWriter>();
         public SAM()
         {
             InitializeComponent();
@@ -124,53 +124,63 @@ namespace sam
             // Create the directory for recordings if it does not exist
             Directory.CreateDirectory(@"rec");
 
-            // Create a filename for the recording based on the current date and time
-            string filename = string.Format(@"rec\recording-{0:yyyy-MM-dd-HH-mm-ss}.wav", DateTime.Now);
-
             // Set up recording device for computer audio
+            string computerAudioFilename = string.Format(@"rec\recording-{0:yyyy-MM-dd-HH-mm-ss}-computerAudio.wav", DateTime.Now);
             computerAudioCapture = new WasapiLoopbackCapture();
             computerAudioCapture.DataAvailable += (sender, e) =>
             {
                 // Write data to computer audio WAV file
                 computerAudioWriter.Write(e.Buffer, 0, e.BytesRecorded);
             };
-            computerAudioWriter = new WaveFileWriter(filename + "-computerAudio.wav", computerAudioCapture.WaveFormat);
+            computerAudioWriter = new WaveFileWriter(computerAudioFilename, computerAudioCapture.WaveFormat);
 
             // Set up recording device for mic audio
-            micCapture = new WaveInEvent();
-            micCapture.DeviceNumber = -1;
             for (int n = 0; n < WaveInEvent.DeviceCount; n++)
             {
                 var capabilities = WaveInEvent.GetCapabilities(n);
                 if (capabilities.ProductName.Contains("Microphone"))
                 {
+                    string micFilename = string.Format(@"rec\recording-{0:yyyy-MM-dd-HH-mm-ss}-{1}.wav", DateTime.Now, capabilities.ProductName);
+                    var micCapture = new WaveInEvent();
                     micCapture.DeviceNumber = n;
-                    break;
+                    var micWriterLocal = new WaveFileWriter(micFilename, micCapture.WaveFormat);
+                    micCapture.DataAvailable += (sender, e) =>
+                    {
+                        // Write data to mic audio WAV file
+                        micWriterLocal.Write(e.Buffer, 0, e.BytesRecorded);
+                    };
+                    micCaptures.Add(micCapture);
+                    micWriters.Add(micWriterLocal);
+                    micCapture.StartRecording();
                 }
             }
-            micCapture.DataAvailable += (sender, e) =>
-            {
-                // Write data to mic audio WAV file
-                micWriter.Write(e.Buffer, 0, e.BytesRecorded);
-            };
-            micWriter = new WaveFileWriter(filename + "-micAudio.wav", micCapture.WaveFormat);
 
             // Start recording
             computerAudioCapture.StartRecording();
-            micCapture.StartRecording();
         }
 
         public void StopRecording()
         {
-            // Stop recording
+            // Stop recording from the computer audio device
             computerAudioCapture.StopRecording();
-            micCapture.StopRecording();
+            computerAudioWriter.Dispose();
+            computerAudioCapture.Dispose();
 
-            // Clean up resources
-            computerAudioWriter?.Dispose();
-            micWriter?.Dispose();
-            computerAudioCapture?.Dispose();
-            micCapture?.Dispose();
+            // Stop recording from the mic audio device(s)
+            foreach (var micCapture in micCaptures)
+            {
+                micCapture.StopRecording();
+                micCapture.Dispose();
+            }
+            // Stop recording from the mic audio device(s)
+            foreach (var micCapture in micWriters)
+            {
+                micCapture.Dispose();
+            }
+
+            // Clear the list of mic captures
+            micCaptures.Clear();
+            micWriters.Clear();
         }
 
         private void OnDataAvailable(object sender, WaveInEventArgs e)

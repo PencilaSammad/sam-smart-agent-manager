@@ -107,6 +107,7 @@ namespace sam
 
         private void btnDeleteRecordings_Click(object sender, EventArgs e)
         {
+
             // Get the full path of the recordings directory
             string recordingsDirectory = Path.Combine(Environment.CurrentDirectory, "rec");
 
@@ -116,8 +117,18 @@ namespace sam
             // Delete each recording file
             foreach (string recordingFile in recordingFiles)
             {
-                File.Delete(recordingFile);
+                try
+                {
+                    // Attempt to delete the file
+                    File.Delete(recordingFile);
+                }
+                catch (IOException ex)
+                {
+                    // The file is in use
+                    MessageBox.Show($"Cannot delete file {recordingFile}. It is in use by another program.");
+                }
             }
+
             MessageBox.Show("Recordings deleted.");
         }
     }
