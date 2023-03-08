@@ -104,5 +104,21 @@ namespace sam
             }
 
         }
+
+        private void btnDeleteRecordings_Click(object sender, EventArgs e)
+        {
+            // Get the full path of the recordings directory
+            string recordingsDirectory = Path.Combine(Environment.CurrentDirectory, "rec");
+
+            // Get all files in the recordings directory
+            string[] recordingFiles = Directory.GetFiles(recordingsDirectory);
+
+            // Delete each recording file
+            foreach (string recordingFile in recordingFiles)
+            {
+                File.Delete(recordingFile);
+            }
+            MessageBox.Show("Recordings deleted.");
+        }
     }
 }

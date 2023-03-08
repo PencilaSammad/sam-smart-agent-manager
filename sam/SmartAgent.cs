@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace sam
 {
@@ -264,6 +265,77 @@ namespace sam
             txtCode.Clear();
 
         }
-       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Create a new instance of the OpenFileDialog class
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            // Set the filter to only allow WAV files
+            openFileDialog.Filter = "WAV files (*.wav)|*.wav";
+
+            // Set the initial directory to the recordings directory
+            openFileDialog.InitialDirectory = Path.Combine(Environment.CurrentDirectory, "rec");
+
+            // Show the file dialog and wait for the user to select a file
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Get the selected file path and do something with it
+                string selectedFilePath = openFileDialog.FileName;
+                
+                AnalyzeAudioAsync(selectedFilePath);
+            }
+            
+        }
+
+        private async Task AnalyzeAudioAsync(string selectedFilePath)
+        {
+            if (conversation == null)
+            {
+                List<string> systemPersonality = new List<string> { };
+
+                systemPersonality.Add(txtAgentPersonality.Text);
+
+                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality);
+
+                if (selectedFilePath != "")
+                {
+                   
+                    // Start the conversation and append the system's response with blue text
+                    List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
+                    foreach (string s in response)
+                    {
+                        AppendTextToChat(s, Color.Blue);
+                    }
+
+                    if (chkSmartAgentEnabled.Checked)
+                    {
+                        SendSmartAgentResponseToSlaves(response);
+                    }
+
+                    
+                };
+
+            }
+            else
+            {
+                if (selectedFilePath != "")
+                {
+                   
+                    // Start the conversation and append the system's response with blue text
+                    List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
+                    foreach (string s in response)
+                    {
+                        AppendTextToChat(s, Color.Blue);
+                    }
+
+                    if (chkSmartAgentEnabled.Checked)
+                    {
+                        SendSmartAgentResponseToSlaves(response);
+                    }
+                   
+                };
+            }
+        }
     }
 }

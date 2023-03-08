@@ -61,6 +61,7 @@
             pnlInput = new Panel();
             btnSend = new Button();
             txtUserInput = new TextBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)agentContainer).BeginInit();
             agentContainer.Panel1.SuspendLayout();
             agentContainer.Panel2.SuspendLayout();
@@ -134,9 +135,9 @@
             groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(groupBox3);
             groupBox1.Controls.Add(groupBox2);
-            groupBox1.Location = new Point(6, 283);
+            groupBox1.Location = new Point(6, 293);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(343, 266);
+            groupBox1.Size = new Size(343, 221);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Slave agent settings";
@@ -147,7 +148,7 @@
             groupBox3.Controls.Add(checkedListSelectedSlaves);
             groupBox3.Location = new Point(9, 22);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(325, 143);
+            groupBox3.Size = new Size(325, 101);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Slave agent names";
@@ -158,14 +159,14 @@
             checkedListSelectedSlaves.FormattingEnabled = true;
             checkedListSelectedSlaves.Location = new Point(3, 19);
             checkedListSelectedSlaves.Name = "checkedListSelectedSlaves";
-            checkedListSelectedSlaves.Size = new Size(319, 121);
+            checkedListSelectedSlaves.Size = new Size(319, 79);
             checkedListSelectedSlaves.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(txtSlaveMessage);
-            groupBox2.Location = new Point(6, 171);
+            groupBox2.Location = new Point(6, 126);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(331, 85);
             groupBox2.TabIndex = 3;
@@ -184,12 +185,13 @@
             // grpAgentControl
             // 
             grpAgentControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAgentControl.Controls.Add(button1);
             grpAgentControl.Controls.Add(chkSmartAgentEnabled);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
-            grpAgentControl.Location = new Point(6, 555);
+            grpAgentControl.Location = new Point(6, 520);
             grpAgentControl.Name = "grpAgentControl";
-            grpAgentControl.Size = new Size(343, 73);
+            grpAgentControl.Size = new Size(343, 108);
             grpAgentControl.TabIndex = 5;
             grpAgentControl.TabStop = false;
             grpAgentControl.Text = "Agent control";
@@ -197,7 +199,7 @@
             // chkSmartAgentEnabled
             // 
             chkSmartAgentEnabled.AutoSize = true;
-            chkSmartAgentEnabled.Location = new Point(172, 35);
+            chkSmartAgentEnabled.Location = new Point(12, 29);
             chkSmartAgentEnabled.Name = "chkSmartAgentEnabled";
             chkSmartAgentEnabled.Size = new Size(135, 19);
             chkSmartAgentEnabled.TabIndex = 7;
@@ -207,7 +209,7 @@
             // btnSaveAgent
             // 
             btnSaveAgent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSaveAgent.Location = new Point(6, 20);
+            btnSaveAgent.Location = new Point(6, 55);
             btnSaveAgent.Name = "btnSaveAgent";
             btnSaveAgent.Size = new Size(78, 47);
             btnSaveAgent.TabIndex = 3;
@@ -218,7 +220,7 @@
             // btnReset
             // 
             btnReset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnReset.Location = new Point(88, 20);
+            btnReset.Location = new Point(88, 55);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(78, 47);
             btnReset.TabIndex = 4;
@@ -232,7 +234,7 @@
             grpPersonality.Controls.Add(txtAgentPersonality);
             grpPersonality.Location = new Point(6, 117);
             grpPersonality.Name = "grpPersonality";
-            grpPersonality.Size = new Size(343, 160);
+            grpPersonality.Size = new Size(343, 170);
             grpPersonality.TabIndex = 2;
             grpPersonality.TabStop = false;
             grpPersonality.Text = "Agent personality";
@@ -243,7 +245,7 @@
             txtAgentPersonality.Location = new Point(3, 19);
             txtAgentPersonality.Multiline = true;
             txtAgentPersonality.Name = "txtAgentPersonality";
-            txtAgentPersonality.Size = new Size(337, 138);
+            txtAgentPersonality.Size = new Size(337, 148);
             txtAgentPersonality.TabIndex = 1;
             // 
             // grpAgentID
@@ -376,20 +378,24 @@
             // 
             txtCode.AllowSeveralTextStyleDrawing = true;
             txtCode.AutoCompleteBracketsList = (new char[] { '(', ')', '{', '}', '[', ']', '"', '"', '\'', '\'' });
-            txtCode.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            txtCode.AutoScrollMinSize = new Size(27, 14);
+            txtCode.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);\r\n";
+            txtCode.AutoScrollMinSize = new Size(2, 14);
             txtCode.BackBrush = null;
+            txtCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
             txtCode.CharHeight = 14;
             txtCode.CharWidth = 8;
             txtCode.DefaultMarkerSize = 8;
             txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             txtCode.Dock = DockStyle.Fill;
-            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtCode.IsReplaceMode = false;
             txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
+            txtCode.LeftBracket = '(';
+            txtCode.LeftBracket2 = '{';
             txtCode.Location = new Point(0, 0);
             txtCode.Name = "txtCode";
             txtCode.Paddings = new Padding(0);
+            txtCode.RightBracket = ')';
+            txtCode.RightBracket2 = '}';
             txtCode.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             txtCode.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("txtCode.ServiceColors");
             txtCode.Size = new Size(639, 474);
@@ -439,6 +445,17 @@
             txtUserInput.Name = "txtUserInput";
             txtUserInput.Size = new Size(572, 80);
             txtUserInput.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button1.Location = new Point(172, 55);
+            button1.Name = "button1";
+            button1.Size = new Size(78, 47);
+            button1.TabIndex = 8;
+            button1.Text = "Analyze recording";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // SmartAgent
             // 
@@ -517,5 +534,6 @@
         private GroupBox groupBox4;
         private Panel panel1;
         private FastColoredTextBoxNS.FastColoredTextBox txtCode;
+        private Button button1;
     }
 }

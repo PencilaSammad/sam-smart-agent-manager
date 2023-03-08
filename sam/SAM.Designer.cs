@@ -37,6 +37,7 @@
             loadSmartAgentToolStripMenuItem = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            btnRecAudio = new ToolStripButton();
             samTools.ContentPanel.SuspendLayout();
             samTools.TopToolStripPanel.SuspendLayout();
             samTools.SuspendLayout();
@@ -72,7 +73,7 @@
             // toolSAM
             // 
             toolSAM.Dock = DockStyle.None;
-            toolSAM.Items.AddRange(new ToolStripItem[] { samMenu });
+            toolSAM.Items.AddRange(new ToolStripItem[] { samMenu, btnRecAudio });
             toolSAM.Location = new Point(0, 0);
             toolSAM.Name = "toolSAM";
             toolSAM.Size = new Size(1179, 31);
@@ -118,6 +119,16 @@
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
+            // btnRecAudio
+            // 
+            btnRecAudio.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnRecAudio.Image = Properties.Resources.sharp_sensors_off_black_24dp;
+            btnRecAudio.ImageTransparentColor = Color.Magenta;
+            btnRecAudio.Name = "btnRecAudio";
+            btnRecAudio.Size = new Size(23, 28);
+            btnRecAudio.Text = "Record audio";
+            btnRecAudio.Click += btnRecAudio_Click;
+            // 
             // SAM
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -148,5 +159,6 @@
         private ToolStripMenuItem newSmartAgentToolStripMenuItem;
         private ToolStripMenuItem loadSmartAgentToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripButton btnRecAudio;
     }
 }

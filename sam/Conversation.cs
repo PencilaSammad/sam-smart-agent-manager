@@ -66,16 +66,51 @@ namespace sam
             if (completionResult.Successful)
             {
                 convResponse.Clear();
-                foreach(var choises in completionResult.Choices)
+                foreach (var choises in completionResult.Choices)
                 {
                     convResponse.Add(choises.Message.Content);
                     ChatMessage npcmessage = new ChatMessage("assistant", choises.Message.Content);
                     chatHistory.Add(npcmessage);
                 }
-                
+
                 return convResponse;
             }
 
+            return convResponse;
+        }
+
+        // Method to start a conversation by taking a user's input and returning a response.
+        public async Task<List<string>> AnalyzeAudio(string audioFile)
+        {
+            List<string> convResponse = new List<string> { };
+            convResponse.Add("Sorry, failed to analyze audio");
+            string fileName = Path.GetFileName(audioFile);
+            var sampleFile = await File.ReadAllBytesAsync(audioFile);
+
+           
+            var audioResult = await sdk.Audio.CreateTranscription(new AudioCreateTranscriptionRequest
+            {
+                FileName = fileName,
+                File = sampleFile,
+                Model = Models.WhisperV1,
+                ResponseFormat = StaticValues.AudioStatics.ResponseFormat.VerboseJson
+            });
+
+
+            if (audioResult.Successful)
+            {
+                convResponse.Clear();
+                convResponse.Add(audioResult.Text);
+            }
+            else
+            {
+                if (audioResult.Error == null)
+                {
+                    throw new Exception("Unknown Error");
+                }
+
+                Console.WriteLine($"{audioResult.Error.Code}: {audioResult.Error.Message}");
+            }
             return convResponse;
         }
     }

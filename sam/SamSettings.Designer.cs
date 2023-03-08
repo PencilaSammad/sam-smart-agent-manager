@@ -37,6 +37,7 @@
             btnLoadDefault = new Button();
             btnSaveAgent = new Button();
             btnReset = new Button();
+            btnDeleteRecordings = new Button();
             grpAPI.SuspendLayout();
             grpPersonality.SuspendLayout();
             grpAgentControl.SuspendLayout();
@@ -48,7 +49,7 @@
             grpAPI.Controls.Add(txtApiKey);
             grpAPI.Location = new Point(12, 12);
             grpAPI.Name = "grpAPI";
-            grpAPI.Size = new Size(378, 51);
+            grpAPI.Size = new Size(391, 51);
             grpAPI.TabIndex = 1;
             grpAPI.TabStop = false;
             grpAPI.Text = "OpenAI API Key";
@@ -59,7 +60,7 @@
             txtApiKey.Location = new Point(3, 19);
             txtApiKey.Name = "txtApiKey";
             txtApiKey.PasswordChar = '*';
-            txtApiKey.Size = new Size(372, 23);
+            txtApiKey.Size = new Size(385, 23);
             txtApiKey.TabIndex = 1;
             // 
             // grpPersonality
@@ -68,7 +69,7 @@
             grpPersonality.Controls.Add(txtAgentPersonality);
             grpPersonality.Location = new Point(12, 69);
             grpPersonality.Name = "grpPersonality";
-            grpPersonality.Size = new Size(378, 219);
+            grpPersonality.Size = new Size(391, 219);
             grpPersonality.TabIndex = 3;
             grpPersonality.TabStop = false;
             grpPersonality.Text = "Default agent personality";
@@ -79,18 +80,19 @@
             txtAgentPersonality.Location = new Point(3, 19);
             txtAgentPersonality.Multiline = true;
             txtAgentPersonality.Name = "txtAgentPersonality";
-            txtAgentPersonality.Size = new Size(372, 197);
+            txtAgentPersonality.Size = new Size(385, 197);
             txtAgentPersonality.TabIndex = 1;
             // 
             // grpAgentControl
             // 
             grpAgentControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAgentControl.Controls.Add(btnDeleteRecordings);
             grpAgentControl.Controls.Add(btnLoadDefault);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
             grpAgentControl.Location = new Point(12, 308);
             grpAgentControl.Name = "grpAgentControl";
-            grpAgentControl.Size = new Size(375, 108);
+            grpAgentControl.Size = new Size(388, 108);
             grpAgentControl.TabIndex = 6;
             grpAgentControl.TabStop = false;
             grpAgentControl.Text = "Settings control";
@@ -100,7 +102,7 @@
             btnLoadDefault.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnLoadDefault.Location = new Point(174, 22);
             btnLoadDefault.Name = "btnLoadDefault";
-            btnLoadDefault.Size = new Size(148, 80);
+            btnLoadDefault.Size = new Size(119, 80);
             btnLoadDefault.TabIndex = 5;
             btnLoadDefault.Text = "Load default agents";
             btnLoadDefault.UseVisualStyleBackColor = true;
@@ -128,12 +130,23 @@
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += btnReset_Click;
             // 
+            // btnDeleteRecordings
+            // 
+            btnDeleteRecordings.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDeleteRecordings.Location = new Point(299, 22);
+            btnDeleteRecordings.Name = "btnDeleteRecordings";
+            btnDeleteRecordings.Size = new Size(78, 80);
+            btnDeleteRecordings.TabIndex = 6;
+            btnDeleteRecordings.Text = "Delete recordings";
+            btnDeleteRecordings.UseVisualStyleBackColor = true;
+            btnDeleteRecordings.Click += btnDeleteRecordings_Click;
+            // 
             // SamSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(402, 419);
+            ClientSize = new Size(415, 419);
             Controls.Add(grpAgentControl);
             Controls.Add(grpPersonality);
             Controls.Add(grpAPI);
@@ -161,5 +174,6 @@
         private Button btnSaveAgent;
         private Button btnReset;
         private Button btnLoadDefault;
+        private Button btnDeleteRecordings;
     }
 }

@@ -2,11 +2,16 @@ using Newtonsoft.Json;
 using System.Drawing.Drawing2D;
 using System.Security.Policy;
 using WeifenLuo.WinFormsUI.Docking;
+using System.IO;
+using NAudio.Wave;
 
 namespace sam
 {
     public partial class SAM : Form
     {
+        private bool audioRecordingActive;
+        private WaveFileWriter writer;
+        private WasapiLoopbackCapture capture;
         public List<SmartAgent> activeSmartAgents { get; set; } = new List<SmartAgent>();
 
         public SAM()
@@ -95,6 +100,57 @@ namespace sam
 
         }
 
+        private void btnRecAudio_Click(object sender, EventArgs e)
+        {
+            if(audioRecordingActive)
+            {
+                btnRecAudio.Image = sam.Properties.Resources.sharp_sensors_off_black_24dp;
+                audioRecordingActive=false;
+                StopRecording();
+            }
+            else
+            {
+                btnRecAudio.Image = sam.Properties.Resources.sharp_sensors_black_24dp;
+                audioRecordingActive=true;
+                StartRecording();
+            }
+        }
 
+        public void StartRecording()
+        {
+            // Create the directory for recordings if it does not exist
+            Directory.CreateDirectory(@"rec");
+
+            // Create a filename for the recording based on the current date and time
+            string filename = string.Format(@"rec\recording-{0:yyyy-MM-dd-HH-mm-ss}.wav", DateTime.Now);
+
+            // Start recording audio using WasapiLoopbackCapture
+            capture = new WasapiLoopbackCapture();
+            capture.DataAvailable += OnDataAvailable;
+            capture.RecordingStopped += OnRecordingStopped;
+            capture.StartRecording();
+
+            // Create a new WaveFileWriter to write audio data to the file
+            writer = new WaveFileWriter(filename, capture.WaveFormat);
+        }
+
+        public void StopRecording()
+        {
+            // Stop recording audio
+            capture.StopRecording();
+        }
+
+        private void OnDataAvailable(object sender, WaveInEventArgs e)
+        {
+            // Write audio data to the WaveFileWriter
+            writer.Write(e.Buffer, 0, e.BytesRecorded);
+        }
+
+        private void OnRecordingStopped(object sender, StoppedEventArgs e)
+        {
+            // Dispose of the WaveFileWriter and WasapiLoopbackCapture
+            writer.Dispose();
+            capture.Dispose();
+        }
     }
 }
