@@ -4,6 +4,7 @@ using System.Security.Policy;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using NAudio.Wave;
+using NAudio.Lame;
 
 namespace sam
 {
@@ -180,7 +181,9 @@ namespace sam
 
             // Clear the list of mic captures
             micCaptures.Clear();
-            micWriters.Clear();
+            micWriters.Clear(); 
+            ConvertWavToMp3InDirectory(Path.GetDirectoryName(Application.ExecutablePath) + "/rec/");
+
         }
 
         private void OnDataAvailable(object sender, WaveInEventArgs e)
@@ -195,5 +198,22 @@ namespace sam
             writer.Dispose();
             capture.Dispose();
         }
+        public void ConvertWavToMp3InDirectory(string directoryPath)
+        {
+            string[] filePaths = Directory.GetFiles(directoryPath, "*.wav");
+
+            foreach (string filePath in filePaths)
+            {
+                string outputFilePath = Path.ChangeExtension(filePath, ".mp3");
+                using (var reader = new WaveFileReader(filePath))
+                using (var writer = new LameMP3FileWriter(outputFilePath, reader.WaveFormat, 128))
+                {
+                    reader.CopyTo(writer);
+                }
+                File.Delete(filePath);
+            }
+        }
+
+
     }
 }
