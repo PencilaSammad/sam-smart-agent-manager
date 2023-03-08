@@ -105,16 +105,16 @@ namespace sam
 
         private void btnRecAudio_Click(object sender, EventArgs e)
         {
-            if(audioRecordingActive)
+            if (audioRecordingActive)
             {
                 btnRecAudio.Image = sam.Properties.Resources.sharp_sensors_off_black_24dp;
-                audioRecordingActive=false;
+                audioRecordingActive = false;
                 StopRecording();
             }
             else
             {
                 btnRecAudio.Image = sam.Properties.Resources.sharp_sensors_black_24dp;
-                audioRecordingActive=true;
+                audioRecordingActive = true;
                 StartRecording();
             }
         }
