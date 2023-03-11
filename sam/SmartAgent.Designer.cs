@@ -69,6 +69,7 @@
             agentTools = new ToolStrip();
             btnTTS = new ToolStripButton();
             ttsVoice = new ToolStripComboBox();
+            toolStripButton1 = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)agentContainer).BeginInit();
             agentContainer.Panel1.SuspendLayout();
             agentContainer.Panel2.SuspendLayout();
@@ -407,7 +408,6 @@
             txtCode.DefaultMarkerSize = 8;
             txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             txtCode.Dock = DockStyle.Fill;
-            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtCode.IsReplaceMode = false;
             txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
             txtCode.LeftBracket = '(';
@@ -498,7 +498,7 @@
             // 
             // agentTools
             // 
-            agentTools.Items.AddRange(new ToolStripItem[] { btnTTS, ttsVoice });
+            agentTools.Items.AddRange(new ToolStripItem[] { btnTTS, ttsVoice, toolStripButton1 });
             agentTools.Location = new Point(0, 0);
             agentTools.Name = "agentTools";
             agentTools.RenderMode = ToolStripRenderMode.Professional;
@@ -523,6 +523,16 @@
             ttsVoice.Name = "ttsVoice";
             ttsVoice.Size = new Size(200, 25);
             ttsVoice.TextChanged += ttsVoice_TextChanged;
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = Properties.Resources._9035019_mic_off_icon;
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(23, 22);
+            toolStripButton1.Text = "Mic";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // SmartAgent
             // 
@@ -616,5 +626,6 @@
         private ToolStrip agentTools;
         private ToolStripButton btnTTS;
         private ToolStripComboBox ttsVoice;
+        private ToolStripButton toolStripButton1;
     }
 }

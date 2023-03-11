@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
+using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -16,7 +17,7 @@ namespace sam
         public SAM parentSAM { get; }
         public bool ttsActive { get; private set; }
         public string ttsSelectedVoice { get; private set; }
-       
+        public bool micActive { get; private set; }
 
         private List<InstalledVoice> _installedVoices;
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
@@ -62,7 +63,7 @@ namespace sam
                     ttsSelectedVoice = voice.VoiceInfo.Name;
                 }
             }
-            
+
 
 
         }
@@ -166,7 +167,7 @@ namespace sam
 
             if (ttsActive)
             {
-                if(SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
+                if (SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
                 {
                     if (color == Color.Blue) { Task.Run(() => SpeakAzureTextAsync(text)); }
                 }
@@ -174,7 +175,7 @@ namespace sam
                 {
                     if (color == Color.Blue) { Task.Run(() => SpeakTextAsync(text)); }
                 }
-                
+
             }
 
             // Add a new line
@@ -441,7 +442,7 @@ namespace sam
             if (ttsActive)
             {
                 btnTTS.Image = sam.Properties.Resources.mute_sound_speaker_volume_icon;
-                ttsActive = false;           
+                ttsActive = false;
             }
             else
             {
@@ -487,6 +488,40 @@ namespace sam
         private void ttsVoice_TextChanged(object sender, EventArgs e)
         {
             ttsSelectedVoice = ttsVoice.Text;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (micActive)
+            {
+                toolStripButton1.Image = sam.Properties.Resources._9035019_mic_off_icon;
+                micActive = false;
+            }
+            else
+            {
+                toolStripButton1.Image = sam.Properties.Resources._9036017_mic_sharp_icon;
+                micActive = true;
+                Task.Run(() => ActivateMicAsync());
+            }
+        }
+
+        private async Task ActivateMicAsync()
+        {
+            var tts = new AzureTextToSpeech(SamUserSettings.Default.AZURE_API_KEY, SamUserSettings.Default.AZURE_TTS_REGION, SamUserSettings.Default.AZURE_TTS_VOICE);
+            while (micActive)
+            {
+                var result = await tts.FromMicAsync();
+                Console.WriteLine($"RECOGNIZED: Text={result.Text}");
+                if (result.Text != "")
+                {
+                    // Clear the user input field
+                    Invoke((Action)(() =>
+                    {
+                        txtUserInput.Text = result.Text;
+                    }));
+                    Task.Run(() => SendUserConversationMessageAsync());
+                }
+            }
         }
     }
 }

@@ -39,6 +39,24 @@ namespace sam
             }
         }
 
+        public async Task<SpeechRecognitionResult> FromMicAsync()
+        {
+            try
+            {
+                var speechConfig = SpeechConfig.FromSubscription(speechKey, speechRegion);
+                using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+                using var speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
 
+                
+                return await speechRecognizer.RecognizeOnceAsync();
+            }
+            catch (Exception ex)
+            {
+                // handle the exception
+                Console.WriteLine($"Error in FromMicAsync: {ex.Message}");
+                return null; // or throw a custom exception
+            }
+        }
     }
+
 }
