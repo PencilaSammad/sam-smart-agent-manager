@@ -70,5 +70,41 @@ namespace sam {
                 this["AgentSettingsFileLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AZURE_API_KEY {
+            get {
+                return ((string)(this["AZURE_API_KEY"]));
+            }
+            set {
+                this["AZURE_API_KEY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AZURE_TTS_REGION {
+            get {
+                return ((string)(this["AZURE_TTS_REGION"]));
+            }
+            set {
+                this["AZURE_TTS_REGION"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AZURE_TTS_VOICE {
+            get {
+                return ((string)(this["AZURE_TTS_VOICE"]));
+            }
+            set {
+                this["AZURE_TTS_VOICE"] = value;
+            }
+        }
     }
 }

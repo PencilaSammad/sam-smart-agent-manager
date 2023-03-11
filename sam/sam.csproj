@@ -18,6 +18,7 @@
     <PackageReference Include="DockPanelSuite" Version="3.1.0" />
     <PackageReference Include="DockPanelSuite.ThemeVS2012" Version="3.1.0" />
     <PackageReference Include="FastColoredTextBox.Net6" Version="1.0.0" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.26.0" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.3" />
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="NAudio.Lame" Version="2.0.1" />

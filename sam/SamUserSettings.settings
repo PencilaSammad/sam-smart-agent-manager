@@ -14,5 +14,14 @@
     <Setting Name="AgentSettingsFileLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">default_agents.csv</Value>
     </Setting>
+    <Setting Name="AZURE_API_KEY" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AZURE_TTS_REGION" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AZURE_TTS_VOICE" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

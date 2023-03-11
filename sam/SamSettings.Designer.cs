@@ -34,19 +34,28 @@
             grpPersonality = new GroupBox();
             txtAgentPersonality = new TextBox();
             grpAgentControl = new GroupBox();
+            btnDeleteRecordings = new Button();
             btnLoadDefault = new Button();
             btnSaveAgent = new Button();
             btnReset = new Button();
-            btnDeleteRecordings = new Button();
+            groupBox1 = new GroupBox();
+            label3 = new Label();
+            txtTTSvoice = new TextBox();
+            label2 = new Label();
+            txtTTSregion = new TextBox();
+            label1 = new Label();
+            txtAzureAPI = new TextBox();
             grpAPI.SuspendLayout();
             grpPersonality.SuspendLayout();
             grpAgentControl.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // grpAPI
             // 
             grpAPI.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpAPI.Controls.Add(txtApiKey);
+            grpAPI.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             grpAPI.Location = new Point(12, 12);
             grpAPI.Name = "grpAPI";
             grpAPI.Size = new Size(391, 51);
@@ -67,9 +76,10 @@
             // 
             grpPersonality.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpPersonality.Controls.Add(txtAgentPersonality);
-            grpPersonality.Location = new Point(12, 69);
+            grpPersonality.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            grpPersonality.Location = new Point(12, 277);
             grpPersonality.Name = "grpPersonality";
-            grpPersonality.Size = new Size(391, 219);
+            grpPersonality.Size = new Size(391, 85);
             grpPersonality.TabIndex = 3;
             grpPersonality.TabStop = false;
             grpPersonality.Text = "Default agent personality";
@@ -80,7 +90,7 @@
             txtAgentPersonality.Location = new Point(3, 19);
             txtAgentPersonality.Multiline = true;
             txtAgentPersonality.Name = "txtAgentPersonality";
-            txtAgentPersonality.Size = new Size(385, 197);
+            txtAgentPersonality.Size = new Size(385, 63);
             txtAgentPersonality.TabIndex = 1;
             // 
             // grpAgentControl
@@ -90,12 +100,24 @@
             grpAgentControl.Controls.Add(btnLoadDefault);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
-            grpAgentControl.Location = new Point(12, 308);
+            grpAgentControl.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            grpAgentControl.Location = new Point(12, 372);
             grpAgentControl.Name = "grpAgentControl";
             grpAgentControl.Size = new Size(388, 108);
             grpAgentControl.TabIndex = 6;
             grpAgentControl.TabStop = false;
             grpAgentControl.Text = "Settings control";
+            // 
+            // btnDeleteRecordings
+            // 
+            btnDeleteRecordings.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDeleteRecordings.Location = new Point(299, 22);
+            btnDeleteRecordings.Name = "btnDeleteRecordings";
+            btnDeleteRecordings.Size = new Size(78, 80);
+            btnDeleteRecordings.TabIndex = 6;
+            btnDeleteRecordings.Text = "Delete recordings";
+            btnDeleteRecordings.UseVisualStyleBackColor = true;
+            btnDeleteRecordings.Click += btnDeleteRecordings_Click;
             // 
             // btnLoadDefault
             // 
@@ -130,23 +152,82 @@
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += btnReset_Click;
             // 
-            // btnDeleteRecordings
+            // groupBox1
             // 
-            btnDeleteRecordings.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDeleteRecordings.Location = new Point(299, 22);
-            btnDeleteRecordings.Name = "btnDeleteRecordings";
-            btnDeleteRecordings.Size = new Size(78, 80);
-            btnDeleteRecordings.TabIndex = 6;
-            btnDeleteRecordings.Text = "Delete recordings";
-            btnDeleteRecordings.UseVisualStyleBackColor = true;
-            btnDeleteRecordings.Click += btnDeleteRecordings_Click;
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(txtTTSvoice);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(txtTTSregion);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(txtAzureAPI);
+            groupBox1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox1.Location = new Point(12, 69);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(391, 202);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Azure settings";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(6, 146);
+            label3.Name = "label3";
+            label3.Size = new Size(114, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Text to speech voice";
+            // 
+            // txtTTSvoice
+            // 
+            txtTTSvoice.Location = new Point(3, 164);
+            txtTTSvoice.Name = "txtTTSvoice";
+            txtTTSvoice.Size = new Size(385, 23);
+            txtTTSvoice.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(6, 88);
+            label2.Name = "label2";
+            label2.Size = new Size(120, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Text to speech region";
+            // 
+            // txtTTSregion
+            // 
+            txtTTSregion.Location = new Point(3, 106);
+            txtTTSregion.Name = "txtTTSregion";
+            txtTTSregion.Size = new Size(385, 23);
+            txtTTSregion.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(6, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(126, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Text to speech API key";
+            // 
+            // txtAzureAPI
+            // 
+            txtAzureAPI.Location = new Point(3, 47);
+            txtAzureAPI.Name = "txtAzureAPI";
+            txtAzureAPI.PasswordChar = '*';
+            txtAzureAPI.Size = new Size(385, 23);
+            txtAzureAPI.TabIndex = 1;
             // 
             // SamSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(415, 419);
+            ClientSize = new Size(415, 483);
+            Controls.Add(groupBox1);
             Controls.Add(grpAgentControl);
             Controls.Add(grpPersonality);
             Controls.Add(grpAPI);
@@ -161,6 +242,8 @@
             grpPersonality.ResumeLayout(false);
             grpPersonality.PerformLayout();
             grpAgentControl.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -175,5 +258,12 @@
         private Button btnReset;
         private Button btnLoadDefault;
         private Button btnDeleteRecordings;
+        private GroupBox groupBox1;
+        private TextBox txtAzureAPI;
+        private Label label3;
+        private TextBox txtTTSvoice;
+        private Label label2;
+        private TextBox txtTTSregion;
+        private Label label1;
     }
 }

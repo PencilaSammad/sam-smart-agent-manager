@@ -16,6 +16,8 @@ namespace sam
         public SAM parentSAM { get; }
         public bool ttsActive { get; private set; }
         public string ttsSelectedVoice { get; private set; }
+       
+
         private List<InstalledVoice> _installedVoices;
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
         {
@@ -164,8 +166,15 @@ namespace sam
 
             if (ttsActive)
             {
-                ;
-                if (color == Color.Blue) { Task.Run(() => SpeakTextAsync(text)); }
+                if(SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
+                {
+                    if (color == Color.Blue) { Task.Run(() => SpeakAzureTextAsync(text)); }
+                }
+                else
+                {
+                    if (color == Color.Blue) { Task.Run(() => SpeakTextAsync(text)); }
+                }
+                
             }
 
             // Add a new line
@@ -175,6 +184,12 @@ namespace sam
             // Add a new line
             txtCode.AppendText(Environment.NewLine);
             txtCode.AppendText(Environment.NewLine);
+        }
+
+        private async Task SpeakAzureTextAsync(string text)
+        {
+            AzureTextToSpeech azureTTS = new AzureTextToSpeech(SamUserSettings.Default.AZURE_API_KEY, SamUserSettings.Default.AZURE_TTS_REGION, SamUserSettings.Default.AZURE_TTS_VOICE);
+            azureTTS.SynthesizeAsync(text);
         }
 
         private async Task SendUserConversationMessageAsync()
@@ -426,7 +441,7 @@ namespace sam
             if (ttsActive)
             {
                 btnTTS.Image = sam.Properties.Resources.mute_sound_speaker_volume_icon;
-                ttsActive = false;
+                ttsActive = false;           
             }
             else
             {
@@ -449,6 +464,8 @@ namespace sam
                     {
                         Console.WriteLine(voice.VoiceInfo.Name);
                     }
+                    // Set a value for the speaking rate.  
+                    synth.Rate = 1;
                     synth.SelectVoice(ttsSelectedVoice);
                     // Configure the audio output.   
                     synth.SetOutputToDefaultAudioDevice();

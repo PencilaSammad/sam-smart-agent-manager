@@ -25,6 +25,9 @@ namespace sam
         private void btnSaveAgent_Click(object sender, EventArgs e)
         {
             SamUserSettings.Default.GPT_API_KEY = txtApiKey.Text;
+            SamUserSettings.Default.AZURE_API_KEY = txtAzureAPI.Text;
+            SamUserSettings.Default.AZURE_TTS_REGION = txtTTSregion.Text;
+            SamUserSettings.Default.AZURE_TTS_VOICE = txtTTSvoice.Text;
             SamUserSettings.Default.DefaultAgentPersonality = txtAgentPersonality.Text;
             SamUserSettings.Default.Save();
         }
@@ -33,6 +36,9 @@ namespace sam
         private void SamSettings_Load(object sender, EventArgs e)
         {
             txtApiKey.Text = SamUserSettings.Default.GPT_API_KEY;
+            txtAzureAPI.Text = SamUserSettings.Default.AZURE_API_KEY;
+            txtTTSregion.Text = SamUserSettings.Default.AZURE_TTS_REGION;
+            txtTTSvoice.Text = SamUserSettings.Default.AZURE_TTS_VOICE;
             txtAgentPersonality.Text = SamUserSettings.Default.DefaultAgentPersonality;
         }
 
@@ -41,8 +47,12 @@ namespace sam
         {
             SamUserSettings.Default.GPT_API_KEY = "";
             SamUserSettings.Default.DefaultAgentPersonality = "";
+            SamUserSettings.Default.AZURE_API_KEY = "";
+            SamUserSettings.Default.AZURE_TTS_REGION = "";
+            SamUserSettings.Default.AZURE_TTS_VOICE = "";
             SamUserSettings.Default.Save();
             txtApiKey.Text = "";
+            txtAzureAPI.Text = "";
             txtAgentPersonality.Text = "";
         }
         public List<(string, string)> DownloadAndParseCsv(string agents)
