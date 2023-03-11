@@ -37,3 +37,14 @@ If you would like to contribute to SAM, please fork the repository and submit a 
 8. Code Panel - This panel displays the code provided by the GPT Agent.
 
 Remember to use these features appropriately to achieve the best possible user experience with your GPT application.
+
+## Azure integration, users can now enable voice chat with their selected SAM agent
+
+By integrating with Azure, users can now take advantage of voice chat capabilities with their selected SAM agent. This feature involves using Azure's Text to Speech and Speech to Text APIs to convert the user's spoken words into text and the SAM agent's responses into spoken words.
+
+To access these features, users must have a valid API key and region set up on their Azure account. Once they've entered this information, the UI will display buttons that enable Text to Speech and Speech to Text functionality.
+
+In practice, this means that users can speak their questions or responses to the SAM agent using a microphone, which will be converted into text and displayed within the chat UI. The SAM agent will then provide its response, which will be converted back into spoken words using the Text to Speech API and forwarded to the user's speakers or headphones.
+
+Azure's voice chat capabilities with the SAM agent adds another level of interactivity and convenience for users who prefer to communicate via speech rather than typing.
+
