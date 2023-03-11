@@ -101,6 +101,8 @@ namespace sam
             {
                 convResponse.Clear();
                 convResponse.Add(audioResult.Text);
+                ChatMessage npcmessage = new ChatMessage("assistant", audioResult.Text);
+                chatHistory.Add(npcmessage);
             }
             else
             {

@@ -181,8 +181,8 @@ namespace sam
 
             // Clear the list of mic captures
             micCaptures.Clear();
-            micWriters.Clear(); 
-            ConvertWavToMp3InDirectory(Path.GetDirectoryName(Application.ExecutablePath) + "/rec/");
+            micWriters.Clear();
+            Task.Run(() => ConvertWavToMp3InDirectory(Path.GetDirectoryName(Application.ExecutablePath) + "/rec/"));
 
         }
 
@@ -198,7 +198,7 @@ namespace sam
             writer.Dispose();
             capture.Dispose();
         }
-        public void ConvertWavToMp3InDirectory(string directoryPath)
+        public async Task ConvertWavToMp3InDirectory(string directoryPath)
         {
             string[] filePaths = Directory.GetFiles(directoryPath, "*.wav");
 

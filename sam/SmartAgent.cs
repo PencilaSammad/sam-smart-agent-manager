@@ -139,7 +139,7 @@ namespace sam
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            SendUserConversationMessageAsync();
+            Task.Run(() => SendUserConversationMessageAsync());
 
         }
 
@@ -163,6 +163,7 @@ namespace sam
 
         private async Task SendUserConversationMessageAsync()
         {
+            Invoke((Action)(() => { StartAnalysis(); }));
             if (conversation == null)
             {
                 List<string> systemPersonality = new List<string> { };
@@ -176,22 +177,29 @@ namespace sam
                     string userInput = txtUserInput.Text;
 
                     // Append the user's input to the chat with green text
-                    AppendTextToChat(userInput, Color.Green);
+                    Invoke((Action)(() =>
+                    {
+                        AppendTextToChat(userInput, Color.Green);
+                    }));
+                    // Clear the user input field
+                    Invoke((Action)(() =>
+                    {
+                        txtUserInput.Text = "";
+                    }));
 
                     // Start the conversation and append the system's response with blue text
                     List<string> response = await conversation.StartConversation(userInput);
                     foreach (string s in response)
                     {
-                        AppendTextToChat(s, Color.Blue);
+                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
                     {
-                        SendSmartAgentResponseToSlaves(response);
+                        Invoke((Action)(() => { SendSmartAgentResponseToSlaves(response); }));
                     }
 
-                    // Clear the user input field
-                    txtUserInput.Text = "";
+
                 };
 
             }
@@ -202,23 +210,34 @@ namespace sam
                     string userInput = txtUserInput.Text;
 
                     // Append the user's input to the chat with green text
-                    AppendTextToChat(userInput, Color.Green);
-
+                    Invoke((Action)(() =>
+                    {
+                        AppendTextToChat(userInput, Color.Green);
+                    }));
+                    // Clear the user input field
+                    Invoke((Action)(() =>
+                    {
+                        txtUserInput.Text = "";
+                    }));
                     // Start the conversation and append the system's response with blue text
                     List<string> response = await conversation.StartConversation(userInput);
                     foreach (string s in response)
                     {
-                        AppendTextToChat(s, Color.Blue);
+                        Invoke((Action)(() =>
+                        {
+                            AppendTextToChat(s, Color.Blue);
+                        }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
                     {
-                        SendSmartAgentResponseToSlaves(response);
+                        Invoke((Action)(() => { SendSmartAgentResponseToSlaves(response); }));
                     }
-                    // Clear the user input field
-                    txtUserInput.Text = "";
+
                 };
             }
+            // Raise the AnalysisComplete event
+            Invoke((Action)(() => { OnAnalysisComplete(); }));
         }
 
         private void SendSmartAgentResponseToSlaves(List<string> response)
@@ -282,14 +301,33 @@ namespace sam
             {
                 // Get the selected file path and do something with it
                 string selectedFilePath = openFileDialog.FileName;
-                
-                AnalyzeAudioAsync(selectedFilePath);
+
+                // Start the analysis task on a background thread
+                Task.Run(() => AnalyzeAudioAsync(selectedFilePath));
+
             }
-            
+
+        }
+
+
+        private void OnAnalysisComplete()
+        {
+            agentStatusLabel.Text = "Ready";
+            agentProgress.Visible = false;
+        }
+
+        private void StartAnalysis()
+        {
+            agentStatusLabel.Text = "Analyzing";
+            agentProgress.Visible = true;
         }
 
         private async Task AnalyzeAudioAsync(string selectedFilePath)
         {
+            Invoke((Action)(() =>
+            {
+                StartAnalysis();
+            }));
             if (conversation == null)
             {
                 List<string> systemPersonality = new List<string> { };
@@ -300,20 +338,20 @@ namespace sam
 
                 if (selectedFilePath != "")
                 {
-                   
+
                     // Start the conversation and append the system's response with blue text
                     List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
                     foreach (string s in response)
                     {
-                        AppendTextToChat(s, Color.Blue);
+                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
                     {
-                        SendSmartAgentResponseToSlaves(response);
+                        Invoke((Action)(() => { SendSmartAgentResponseToSlaves(response); }));
                     }
 
-                    
+
                 };
 
             }
@@ -321,21 +359,27 @@ namespace sam
             {
                 if (selectedFilePath != "")
                 {
-                   
+
                     // Start the conversation and append the system's response with blue text
                     List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
                     foreach (string s in response)
                     {
-                        AppendTextToChat(s, Color.Blue);
+                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
                     {
-                        SendSmartAgentResponseToSlaves(response);
+                        Invoke((Action)(() => { SendSmartAgentResponseToSlaves(response); }));
                     }
-                   
+
                 };
             }
+            // Raise the AnalysisComplete event
+            Invoke((Action)(() =>
+            {
+                OnAnalysisComplete();
+            }));
+
         }
     }
 }
