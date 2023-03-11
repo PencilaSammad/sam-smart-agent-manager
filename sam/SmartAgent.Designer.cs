@@ -468,9 +468,10 @@
             agentStatus.Items.AddRange(new ToolStripItem[] { agentStatusLabel, toolStripStatusLabel1, agentProgress });
             agentStatus.Location = new Point(0, 631);
             agentStatus.Name = "agentStatus";
+            agentStatus.RenderMode = ToolStripRenderMode.Professional;
             agentStatus.Size = new Size(1036, 22);
+            agentStatus.SizingGrip = false;
             agentStatus.TabIndex = 1;
-            agentStatus.Text = "statusStrip1";
             // 
             // agentStatusLabel
             // 
