@@ -39,8 +39,8 @@
             btnSaveAgent = new Button();
             btnReset = new Button();
             groupBox1 = new GroupBox();
+            cmbTTSVoice = new ComboBox();
             label3 = new Label();
-            txtTTSvoice = new TextBox();
             label2 = new Label();
             txtTTSregion = new TextBox();
             label1 = new Label();
@@ -155,8 +155,8 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(cmbTTSVoice);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(txtTTSvoice);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(txtTTSregion);
             groupBox1.Controls.Add(label1);
@@ -169,6 +169,15 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Azure settings";
             // 
+            // cmbTTSVoice
+            // 
+            cmbTTSVoice.FormattingEnabled = true;
+            cmbTTSVoice.Items.AddRange(new object[] { "fi-FI-HarriNeural", "fi-FI-NooraNeural", "fi-FI-SelmaNeural", "en-US-AIGenerate1Neural1", "en-US-AIGenerate2Neural1", "en-US-AmberNeural", "en-US-AnaNeural", "en-US-AriaNeural", "en-US-AshleyNeural", "en-US-BrandonNeural", "en-US-ChristopherNeural", "en-US-CoraNeural", "en-US-DavisNeural", "en-US-ElizabethNeural", "en-US-EricNeural", "en-US-GuyNeural", "en-US-JacobNeural", "en-US-JaneNeural", "en-US-JasonNeural", "en-US-JennyMultilingualNeural3", "en-US-JennyNeural", "en-US-MichelleNeural", "en-US-MonicaNeural", "en-US-NancyNeural", "en-US-RogerNeural1", "en-US-SaraNeural", "en-US-SteffanNeural", "en-US-TonyNeural" });
+            cmbTTSVoice.Location = new Point(3, 164);
+            cmbTTSVoice.Name = "cmbTTSVoice";
+            cmbTTSVoice.Size = new Size(385, 23);
+            cmbTTSVoice.TabIndex = 7;
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -178,13 +187,6 @@
             label3.Size = new Size(114, 15);
             label3.TabIndex = 6;
             label3.Text = "Text to speech voice";
-            // 
-            // txtTTSvoice
-            // 
-            txtTTSvoice.Location = new Point(3, 164);
-            txtTTSvoice.Name = "txtTTSvoice";
-            txtTTSvoice.Size = new Size(385, 23);
-            txtTTSvoice.TabIndex = 5;
             // 
             // label2
             // 
@@ -261,9 +263,9 @@
         private GroupBox groupBox1;
         private TextBox txtAzureAPI;
         private Label label3;
-        private TextBox txtTTSvoice;
         private Label label2;
         private TextBox txtTTSregion;
         private Label label1;
+        private ComboBox cmbTTSVoice;
     }
 }

@@ -27,7 +27,7 @@ namespace sam
             SamUserSettings.Default.GPT_API_KEY = txtApiKey.Text;
             SamUserSettings.Default.AZURE_API_KEY = txtAzureAPI.Text;
             SamUserSettings.Default.AZURE_TTS_REGION = txtTTSregion.Text;
-            SamUserSettings.Default.AZURE_TTS_VOICE = txtTTSvoice.Text;
+            SamUserSettings.Default.AZURE_TTS_VOICE = cmbTTSVoice.Text;
             SamUserSettings.Default.DefaultAgentPersonality = txtAgentPersonality.Text;
             SamUserSettings.Default.Save();
         }
@@ -38,7 +38,7 @@ namespace sam
             txtApiKey.Text = SamUserSettings.Default.GPT_API_KEY;
             txtAzureAPI.Text = SamUserSettings.Default.AZURE_API_KEY;
             txtTTSregion.Text = SamUserSettings.Default.AZURE_TTS_REGION;
-            txtTTSvoice.Text = SamUserSettings.Default.AZURE_TTS_VOICE;
+            cmbTTSVoice.Text = SamUserSettings.Default.AZURE_TTS_VOICE;
             txtAgentPersonality.Text = SamUserSettings.Default.DefaultAgentPersonality;
         }
 
