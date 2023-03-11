@@ -406,10 +406,7 @@ namespace sam
                     {
                         Invoke((Action)(() => { SendSmartAgentResponseToSlaves(response); }));
                     }
-
-
                 };
-
             }
             else
             {
