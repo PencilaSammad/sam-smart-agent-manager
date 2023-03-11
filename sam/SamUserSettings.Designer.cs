@@ -106,5 +106,17 @@ namespace sam {
                 this["AZURE_TTS_VOICE"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US")]
+        public string AZURE_STT_LANG {
+            get {
+                return ((string)(this["AZURE_STT_LANG"]));
+            }
+            set {
+                this["AZURE_STT_LANG"] = value;
+            }
+        }
     }
 }

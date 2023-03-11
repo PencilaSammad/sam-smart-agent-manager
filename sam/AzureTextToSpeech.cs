@@ -44,6 +44,7 @@ namespace sam
             try
             {
                 var speechConfig = SpeechConfig.FromSubscription(speechKey, speechRegion);
+                speechConfig.SpeechRecognitionLanguage = SamUserSettings.Default.AZURE_STT_LANG;
                 using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
                 using var speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
 

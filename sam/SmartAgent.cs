@@ -519,7 +519,7 @@ namespace sam
                     {
                         txtUserInput.Text = result.Text;
                     }));
-                    Task.Run(() => SendUserConversationMessageAsync());
+                    await SendUserConversationMessageAsync();
                 }
             }
         }

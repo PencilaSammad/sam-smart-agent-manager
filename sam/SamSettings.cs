@@ -28,6 +28,7 @@ namespace sam
             SamUserSettings.Default.AZURE_API_KEY = txtAzureAPI.Text;
             SamUserSettings.Default.AZURE_TTS_REGION = txtTTSregion.Text;
             SamUserSettings.Default.AZURE_TTS_VOICE = cmbTTSVoice.Text;
+            SamUserSettings.Default.AZURE_STT_LANG = cmbVoiceRecLang.Text;
             SamUserSettings.Default.DefaultAgentPersonality = txtAgentPersonality.Text;
             SamUserSettings.Default.Save();
         }
@@ -39,6 +40,7 @@ namespace sam
             txtAzureAPI.Text = SamUserSettings.Default.AZURE_API_KEY;
             txtTTSregion.Text = SamUserSettings.Default.AZURE_TTS_REGION;
             cmbTTSVoice.Text = SamUserSettings.Default.AZURE_TTS_VOICE;
+            cmbVoiceRecLang.Text = SamUserSettings.Default.AZURE_STT_LANG;
             txtAgentPersonality.Text = SamUserSettings.Default.DefaultAgentPersonality;
         }
 
@@ -50,6 +52,7 @@ namespace sam
             SamUserSettings.Default.AZURE_API_KEY = "";
             SamUserSettings.Default.AZURE_TTS_REGION = "";
             SamUserSettings.Default.AZURE_TTS_VOICE = "";
+            SamUserSettings.Default.AZURE_STT_LANG = "";
             SamUserSettings.Default.Save();
             txtApiKey.Text = "";
             txtAzureAPI.Text = "";

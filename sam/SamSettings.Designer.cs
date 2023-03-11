@@ -45,6 +45,8 @@
             txtTTSregion = new TextBox();
             label1 = new Label();
             txtAzureAPI = new TextBox();
+            cmbVoiceRecLang = new ComboBox();
+            label4 = new Label();
             grpAPI.SuspendLayout();
             grpPersonality.SuspendLayout();
             grpAgentControl.SuspendLayout();
@@ -77,7 +79,7 @@
             grpPersonality.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpPersonality.Controls.Add(txtAgentPersonality);
             grpPersonality.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            grpPersonality.Location = new Point(12, 277);
+            grpPersonality.Location = new Point(9, 338);
             grpPersonality.Name = "grpPersonality";
             grpPersonality.Size = new Size(391, 85);
             grpPersonality.TabIndex = 3;
@@ -101,7 +103,7 @@
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
             grpAgentControl.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            grpAgentControl.Location = new Point(12, 372);
+            grpAgentControl.Location = new Point(12, 429);
             grpAgentControl.Name = "grpAgentControl";
             grpAgentControl.Size = new Size(388, 108);
             grpAgentControl.TabIndex = 6;
@@ -155,6 +157,8 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(cmbVoiceRecLang);
+            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(cmbTTSVoice);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
@@ -164,7 +168,7 @@
             groupBox1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 69);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(391, 202);
+            groupBox1.Size = new Size(391, 244);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Azure settings";
@@ -223,12 +227,31 @@
             txtAzureAPI.Size = new Size(385, 23);
             txtAzureAPI.TabIndex = 1;
             // 
+            // cmbVoiceRecLang
+            // 
+            cmbVoiceRecLang.FormattingEnabled = true;
+            cmbVoiceRecLang.Items.AddRange(new object[] { "fi-FI", "en-US" });
+            cmbVoiceRecLang.Location = new Point(3, 208);
+            cmbVoiceRecLang.Name = "cmbVoiceRecLang";
+            cmbVoiceRecLang.Size = new Size(385, 23);
+            cmbVoiceRecLang.TabIndex = 9;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(6, 190);
+            label4.Name = "label4";
+            label4.Size = new Size(152, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Voice recognition language";
+            // 
             // SamSettings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(415, 483);
+            ClientSize = new Size(415, 540);
             Controls.Add(groupBox1);
             Controls.Add(grpAgentControl);
             Controls.Add(grpPersonality);
@@ -267,5 +290,7 @@
         private TextBox txtTTSregion;
         private Label label1;
         private ComboBox cmbTTSVoice;
+        private ComboBox cmbVoiceRecLang;
+        private Label label4;
     }
 }
