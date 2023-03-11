@@ -1,17 +1,11 @@
-﻿using FastColoredTextBoxNS;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Speech.Recognition;
+using System.Speech.Synthesis;
 using WeifenLuo.WinFormsUI.Docking;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace sam
 {
@@ -20,8 +14,9 @@ namespace sam
         public AgentSettings? currentAgentSettings { get; private set; }
         internal Conversation conversation { get; private set; }
         public SAM parentSAM { get; }
-
-
+        public bool ttsActive { get; private set; }
+        public string ttsSelectedVoice { get; private set; }
+        private List<InstalledVoice> _installedVoices;
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
         {
             InitializeComponent();
@@ -53,6 +48,21 @@ namespace sam
             }
             this.currentAgentSettings = selectedAgentSettings;
             LoadSlaveAgents();
+
+            //Load voices
+            using (SpeechSynthesizer synth = new SpeechSynthesizer())
+            {
+                SpeechApiReflectionHelper.InjectOneCoreVoices(synth);
+                foreach (var voice in synth.GetInstalledVoices())
+                {
+                    ttsVoice.Items.Add(voice.VoiceInfo.Name);
+                    ttsVoice.Text = voice.VoiceInfo.Name;
+                    ttsSelectedVoice = voice.VoiceInfo.Name;
+                }
+            }
+            
+
+
         }
 
         private void LoadSlaveAgents()
@@ -151,6 +161,12 @@ namespace sam
             // Append the text to the control
             txtChat.AppendText(text);
             txtCode.AppendText(text);
+
+            if (ttsActive)
+            {
+                ;
+                if (color == Color.Blue) { Task.Run(() => SpeakTextAsync(text)); }
+            }
 
             // Add a new line
             txtChat.AppendText(Environment.NewLine);
@@ -296,8 +312,8 @@ namespace sam
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            
-            if(conversation!=null)
+
+            if (conversation != null)
             {
                 conversation.ClearChatHistory();
                 conversation = null;
@@ -403,6 +419,57 @@ namespace sam
                 OnAnalysisComplete();
             }));
 
+        }
+
+        private void btnTTS_Click(object sender, EventArgs e)
+        {
+            if (ttsActive)
+            {
+                btnTTS.Image = sam.Properties.Resources.mute_sound_speaker_volume_icon;
+                ttsActive = false;
+            }
+            else
+            {
+                btnTTS.Image = sam.Properties.Resources.lound_sound_speaker_volume_icon;
+                ttsActive = true;
+            }
+        }
+
+        private async Task SpeakTextAsync(string speak)
+        {
+            try
+            {
+
+
+                // Initialize a new instance of the SpeechSynthesizer.  
+                using (SpeechSynthesizer synth = new SpeechSynthesizer())
+                {
+                    SpeechApiReflectionHelper.InjectOneCoreVoices(synth);
+                    foreach (var voice in synth.GetInstalledVoices())
+                    {
+                        Console.WriteLine(voice.VoiceInfo.Name);
+                    }
+                    synth.SelectVoice(ttsSelectedVoice);
+                    // Configure the audio output.   
+                    synth.SetOutputToDefaultAudioDevice();
+
+                    // Create a prompt from a string.  
+                    Prompt color = new Prompt(speak);
+
+                    // Speak the contents of the prompt synchronously.  
+                    synth.Speak(color);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any other errors that may occur
+                Debug.WriteLine($"Error in SpeakTextAsync: {ex.Message}");
+            }
+        }
+
+        private void ttsVoice_TextChanged(object sender, EventArgs e)
+        {
+            ttsSelectedVoice = ttsVoice.Text;
         }
     }
 }

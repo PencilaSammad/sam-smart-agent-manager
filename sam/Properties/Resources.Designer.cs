@@ -143,6 +143,26 @@ namespace sam.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lound_sound_speaker_volume_icon {
+            get {
+                object obj = ResourceManager.GetObject("lound_sound_speaker_volume_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mute_sound_speaker_volume_icon {
+            get {
+                object obj = ResourceManager.GetObject("mute_sound_speaker_volume_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sharp_sensors_black_24dp {
             get {
                 object obj = ResourceManager.GetObject("sharp_sensors_black_24dp", resourceCulture);

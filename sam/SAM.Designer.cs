@@ -76,6 +76,7 @@
             toolSAM.Items.AddRange(new ToolStripItem[] { samMenu, btnRecAudio });
             toolSAM.Location = new Point(0, 0);
             toolSAM.Name = "toolSAM";
+            toolSAM.RenderMode = ToolStripRenderMode.Professional;
             toolSAM.Size = new Size(1179, 31);
             toolSAM.Stretch = true;
             toolSAM.TabIndex = 0;

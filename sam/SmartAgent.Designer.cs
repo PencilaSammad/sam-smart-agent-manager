@@ -66,6 +66,9 @@
             agentStatusLabel = new ToolStripStatusLabel();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             agentProgress = new ToolStripProgressBar();
+            agentTools = new ToolStrip();
+            btnTTS = new ToolStripButton();
+            ttsVoice = new ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)agentContainer).BeginInit();
             agentContainer.Panel1.SuspendLayout();
             agentContainer.Panel2.SuspendLayout();
@@ -90,12 +93,13 @@
             grpUserInput.SuspendLayout();
             pnlInput.SuspendLayout();
             agentStatus.SuspendLayout();
+            agentTools.SuspendLayout();
             SuspendLayout();
             // 
             // agentContainer
             // 
             agentContainer.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            agentContainer.Location = new Point(0, 0);
+            agentContainer.Location = new Point(0, 42);
             agentContainer.Name = "agentContainer";
             // 
             // agentContainer.Panel1
@@ -106,7 +110,7 @@
             // 
             agentContainer.Panel2.Controls.Add(tabDialogs);
             agentContainer.Panel2.Controls.Add(grpUserInput);
-            agentContainer.Size = new Size(1036, 628);
+            agentContainer.Size = new Size(1036, 586);
             agentContainer.SplitterDistance = 361;
             agentContainer.TabIndex = 0;
             // 
@@ -116,7 +120,7 @@
             agentSettingsGrp.Dock = DockStyle.Fill;
             agentSettingsGrp.Location = new Point(0, 0);
             agentSettingsGrp.Name = "agentSettingsGrp";
-            agentSettingsGrp.Size = new Size(361, 628);
+            agentSettingsGrp.Size = new Size(361, 586);
             agentSettingsGrp.TabIndex = 0;
             agentSettingsGrp.TabStop = false;
             agentSettingsGrp.Text = "Agent settings";
@@ -132,7 +136,7 @@
             settingsPanel.Dock = DockStyle.Fill;
             settingsPanel.Location = new Point(3, 19);
             settingsPanel.Name = "settingsPanel";
-            settingsPanel.Size = new Size(355, 606);
+            settingsPanel.Size = new Size(355, 564);
             settingsPanel.TabIndex = 1;
             // 
             // groupBox1
@@ -140,7 +144,7 @@
             groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(groupBox3);
             groupBox1.Controls.Add(groupBox2);
-            groupBox1.Location = new Point(6, 268);
+            groupBox1.Location = new Point(6, 226);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(343, 221);
             groupBox1.TabIndex = 6;
@@ -194,7 +198,7 @@
             grpAgentControl.Controls.Add(chkSmartAgentEnabled);
             grpAgentControl.Controls.Add(btnSaveAgent);
             grpAgentControl.Controls.Add(btnReset);
-            grpAgentControl.Location = new Point(6, 495);
+            grpAgentControl.Location = new Point(6, 453);
             grpAgentControl.Name = "grpAgentControl";
             grpAgentControl.Size = new Size(343, 108);
             grpAgentControl.TabIndex = 5;
@@ -250,7 +254,7 @@
             grpPersonality.Controls.Add(txtAgentPersonality);
             grpPersonality.Location = new Point(6, 117);
             grpPersonality.Name = "grpPersonality";
-            grpPersonality.Size = new Size(343, 145);
+            grpPersonality.Size = new Size(343, 103);
             grpPersonality.TabIndex = 2;
             grpPersonality.TabStop = false;
             grpPersonality.Text = "Agent personality";
@@ -261,7 +265,7 @@
             txtAgentPersonality.Location = new Point(3, 19);
             txtAgentPersonality.Multiline = true;
             txtAgentPersonality.Name = "txtAgentPersonality";
-            txtAgentPersonality.Size = new Size(337, 123);
+            txtAgentPersonality.Size = new Size(337, 81);
             txtAgentPersonality.TabIndex = 1;
             // 
             // grpAgentID
@@ -310,7 +314,7 @@
             tabDialogs.Location = new Point(6, 3);
             tabDialogs.Name = "tabDialogs";
             tabDialogs.SelectedIndex = 0;
-            tabDialogs.Size = new Size(659, 505);
+            tabDialogs.Size = new Size(659, 463);
             tabDialogs.TabIndex = 2;
             // 
             // tabPageText
@@ -319,7 +323,7 @@
             tabPageText.Location = new Point(4, 24);
             tabPageText.Name = "tabPageText";
             tabPageText.Padding = new Padding(3);
-            tabPageText.Size = new Size(651, 477);
+            tabPageText.Size = new Size(651, 435);
             tabPageText.TabIndex = 0;
             tabPageText.Text = "Text";
             tabPageText.UseVisualStyleBackColor = true;
@@ -330,7 +334,7 @@
             agentConversation.Dock = DockStyle.Fill;
             agentConversation.Location = new Point(3, 3);
             agentConversation.Name = "agentConversation";
-            agentConversation.Size = new Size(645, 471);
+            agentConversation.Size = new Size(645, 429);
             agentConversation.TabIndex = 0;
             agentConversation.TabStop = false;
             agentConversation.Text = "Conversation";
@@ -342,7 +346,7 @@
             conversationContentPanel.Dock = DockStyle.Fill;
             conversationContentPanel.Location = new Point(3, 19);
             conversationContentPanel.Name = "conversationContentPanel";
-            conversationContentPanel.Size = new Size(639, 449);
+            conversationContentPanel.Size = new Size(639, 407);
             conversationContentPanel.TabIndex = 0;
             // 
             // txtChat
@@ -354,7 +358,7 @@
             txtChat.Location = new Point(0, 0);
             txtChat.Name = "txtChat";
             txtChat.ReadOnly = true;
-            txtChat.Size = new Size(639, 449);
+            txtChat.Size = new Size(639, 407);
             txtChat.TabIndex = 0;
             txtChat.Text = "";
             // 
@@ -364,7 +368,7 @@
             tabPageCode.Location = new Point(4, 24);
             tabPageCode.Name = "tabPageCode";
             tabPageCode.Padding = new Padding(3);
-            tabPageCode.Size = new Size(651, 477);
+            tabPageCode.Size = new Size(651, 435);
             tabPageCode.TabIndex = 1;
             tabPageCode.Text = "Code";
             tabPageCode.UseVisualStyleBackColor = true;
@@ -375,7 +379,7 @@
             groupBox4.Dock = DockStyle.Fill;
             groupBox4.Location = new Point(3, 3);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(645, 471);
+            groupBox4.Size = new Size(645, 429);
             groupBox4.TabIndex = 1;
             groupBox4.TabStop = false;
             groupBox4.Text = "Code";
@@ -387,7 +391,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 19);
             panel1.Name = "panel1";
-            panel1.Size = new Size(639, 449);
+            panel1.Size = new Size(639, 407);
             panel1.TabIndex = 0;
             // 
             // txtCode
@@ -403,6 +407,7 @@
             txtCode.DefaultMarkerSize = 8;
             txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             txtCode.Dock = DockStyle.Fill;
+            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtCode.IsReplaceMode = false;
             txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
             txtCode.LeftBracket = '(';
@@ -414,7 +419,7 @@
             txtCode.RightBracket2 = '}';
             txtCode.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             txtCode.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("txtCode.ServiceColors");
-            txtCode.Size = new Size(639, 449);
+            txtCode.Size = new Size(639, 407);
             txtCode.TabIndex = 0;
             txtCode.Zoom = 100;
             // 
@@ -422,7 +427,7 @@
             // 
             grpUserInput.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grpUserInput.Controls.Add(pnlInput);
-            grpUserInput.Location = new Point(3, 514);
+            grpUserInput.Location = new Point(3, 472);
             grpUserInput.Name = "grpUserInput";
             grpUserInput.Size = new Size(668, 111);
             grpUserInput.TabIndex = 1;
@@ -481,7 +486,7 @@
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(849, 17);
+            toolStripStatusLabel1.Size = new Size(982, 17);
             toolStripStatusLabel1.Spring = true;
             // 
             // agentProgress
@@ -491,12 +496,41 @@
             agentProgress.Style = ProgressBarStyle.Marquee;
             agentProgress.Visible = false;
             // 
+            // agentTools
+            // 
+            agentTools.Items.AddRange(new ToolStripItem[] { btnTTS, ttsVoice });
+            agentTools.Location = new Point(0, 0);
+            agentTools.Name = "agentTools";
+            agentTools.RenderMode = ToolStripRenderMode.Professional;
+            agentTools.Size = new Size(1036, 25);
+            agentTools.Stretch = true;
+            agentTools.TabIndex = 2;
+            agentTools.Text = "agentTools";
+            // 
+            // btnTTS
+            // 
+            btnTTS.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnTTS.Image = Properties.Resources.mute_sound_speaker_volume_icon;
+            btnTTS.ImageTransparentColor = Color.Magenta;
+            btnTTS.Name = "btnTTS";
+            btnTTS.Size = new Size(23, 22);
+            btnTTS.Text = "Text to speech";
+            btnTTS.Click += btnTTS_Click;
+            // 
+            // ttsVoice
+            // 
+            ttsVoice.DropDownWidth = 200;
+            ttsVoice.Name = "ttsVoice";
+            ttsVoice.Size = new Size(200, 25);
+            ttsVoice.TextChanged += ttsVoice_TextChanged;
+            // 
             // SmartAgent
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1036, 653);
+            Controls.Add(agentTools);
             Controls.Add(agentStatus);
             Controls.Add(agentContainer);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -535,6 +569,8 @@
             pnlInput.PerformLayout();
             agentStatus.ResumeLayout(false);
             agentStatus.PerformLayout();
+            agentTools.ResumeLayout(false);
+            agentTools.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -577,5 +613,8 @@
         private ToolStripStatusLabel agentStatusLabel;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripProgressBar agentProgress;
+        private ToolStrip agentTools;
+        private ToolStripButton btnTTS;
+        private ToolStripComboBox ttsVoice;
     }
 }
