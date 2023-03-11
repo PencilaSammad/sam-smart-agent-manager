@@ -18,6 +18,7 @@ namespace sam
         public bool ttsActive { get; private set; }
         public string ttsSelectedVoice { get; private set; }
         public bool micActive { get; private set; }
+        public bool bAssistantSpeaking { get; private set; }
 
         private List<InstalledVoice> _installedVoices;
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
@@ -169,7 +170,12 @@ namespace sam
             {
                 if (SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
                 {
-                    if (color == Color.Blue) { await SpeakAzureTextAsync(text); }
+                    if (color == Color.Blue) 
+                    {
+                        bAssistantSpeaking = true;
+                        await SpeakAzureTextAsync(text);
+                        bAssistantSpeaking = false;
+                    }
                 }
                 else
                 {
@@ -191,7 +197,7 @@ namespace sam
         private async Task SpeakAzureTextAsync(string text)
         {
             AzureTextToSpeech azureTTS = new AzureTextToSpeech(SamUserSettings.Default.AZURE_API_KEY, SamUserSettings.Default.AZURE_TTS_REGION, SamUserSettings.Default.AZURE_TTS_VOICE);
-            azureTTS.SynthesizeAsync(text);
+            await azureTTS.SynthesizeAsync(text);
         }
 
         private async Task SendUserConversationMessageAsync()
@@ -508,6 +514,7 @@ namespace sam
             var tts = new AzureTextToSpeech(SamUserSettings.Default.AZURE_API_KEY, SamUserSettings.Default.AZURE_TTS_REGION, SamUserSettings.Default.AZURE_TTS_VOICE);
             while (micActive)
             {
+                while (bAssistantSpeaking) { Thread.Sleep(1000); }
                 var result = await tts.FromMicAsync();
                 Console.WriteLine($"RECOGNIZED: Text={result.Text}");
                 if (result.Text != "")
