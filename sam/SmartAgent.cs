@@ -156,7 +156,7 @@ namespace sam
 
         }
 
-        private void AppendTextToChat(string text, Color color)
+        private async Task AppendTextToChatAsync(string text, Color color)
         {
             // Set the color of the text that will be appended
             txtChat.SelectionColor = color;
@@ -169,11 +169,11 @@ namespace sam
             {
                 if (SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
                 {
-                    if (color == Color.Blue) { Task.Run(() => SpeakAzureTextAsync(text)); }
+                    if (color == Color.Blue) { await SpeakAzureTextAsync(text); }
                 }
                 else
                 {
-                    if (color == Color.Blue) { Task.Run(() => SpeakTextAsync(text)); }
+                    if (color == Color.Blue) { await SpeakTextAsync(text); }
                 }
 
             }
@@ -181,6 +181,7 @@ namespace sam
             // Add a new line
             txtChat.AppendText(Environment.NewLine);
             txtChat.AppendText(Environment.NewLine);
+            txtChat.ScrollToCaret();
 
             // Add a new line
             txtCode.AppendText(Environment.NewLine);
@@ -210,7 +211,7 @@ namespace sam
                         // Append the user's input to the chat with green text
                         Invoke((Action)(() =>
                         {
-                            AppendTextToChat(chat.Content, Color.Green);
+                            AppendTextToChatAsync(chat.Content, Color.Green);
                         }));
                     }
                     else
@@ -218,7 +219,7 @@ namespace sam
                         // Append the gpt input to the chat with blue text
                         Invoke((Action)(() =>
                         {
-                            AppendTextToChat(chat.Content, Color.Blue);
+                            AppendTextToChatAsync(chat.Content, Color.Blue);
                         }));
                     }
                 }
@@ -229,7 +230,7 @@ namespace sam
                     // Append the user's input to the chat with green text
                     Invoke((Action)(() =>
                     {
-                        AppendTextToChat(userInput, Color.Green);
+                        AppendTextToChatAsync(userInput, Color.Green);
                     }));
                     // Clear the user input field
                     Invoke((Action)(() =>
@@ -241,7 +242,7 @@ namespace sam
                     List<string> response = await conversation.StartConversation(userInput);
                     foreach (string s in response)
                     {
-                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
+                        Invoke((Action)(() => { AppendTextToChatAsync(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
@@ -262,7 +263,7 @@ namespace sam
                     // Append the user's input to the chat with green text
                     Invoke((Action)(() =>
                     {
-                        AppendTextToChat(userInput, Color.Green);
+                        AppendTextToChatAsync(userInput, Color.Green);
                     }));
                     // Clear the user input field
                     Invoke((Action)(() =>
@@ -275,7 +276,7 @@ namespace sam
                     {
                         Invoke((Action)(() =>
                         {
-                            AppendTextToChat(s, Color.Blue);
+                            AppendTextToChatAsync(s, Color.Blue);
                         }));
                     }
 
@@ -398,7 +399,7 @@ namespace sam
                     List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
                     foreach (string s in response)
                     {
-                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
+                        Invoke((Action)(() => { AppendTextToChatAsync(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
@@ -419,7 +420,7 @@ namespace sam
                     List<string> response = await conversation.AnalyzeAudio(selectedFilePath);
                     foreach (string s in response)
                     {
-                        Invoke((Action)(() => { AppendTextToChat(s, Color.Blue); }));
+                        Invoke((Action)(() => { AppendTextToChatAsync(s, Color.Blue); }));
                     }
 
                     if (chkSmartAgentEnabled.Checked)
