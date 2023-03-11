@@ -170,8 +170,26 @@ namespace sam
 
                 systemPersonality.Add(txtAgentPersonality.Text);
 
-                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality);
-
+                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
+                foreach (var chat in conversation.chatHistory)
+                {
+                    if (chat.Role == "user")
+                    {
+                        // Append the user's input to the chat with green text
+                        Invoke((Action)(() =>
+                        {
+                            AppendTextToChat(chat.Content, Color.Green);
+                        }));
+                    }
+                    else
+                    {
+                        // Append the gpt input to the chat with blue text
+                        Invoke((Action)(() =>
+                        {
+                            AppendTextToChat(chat.Content, Color.Blue);
+                        }));
+                    }
+                }
                 if (txtUserInput.Text != "")
                 {
                     string userInput = txtUserInput.Text;
@@ -278,7 +296,12 @@ namespace sam
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            conversation = null;
+            
+            if(conversation!=null)
+            {
+                conversation.ClearChatHistory();
+                conversation = null;
+            }
             txtChat.Text = "";
             txtCode.SelectAll();
             txtCode.Clear();
@@ -334,7 +357,7 @@ namespace sam
 
                 systemPersonality.Add(txtAgentPersonality.Text);
 
-                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality);
+                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
 
                 if (selectedFilePath != "")
                 {
