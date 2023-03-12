@@ -38,6 +38,7 @@
             settingsToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             btnRecAudio = new ToolStripButton();
+            btnOpenRecFolder = new ToolStripButton();
             samTools.ContentPanel.SuspendLayout();
             samTools.LeftToolStripPanel.SuspendLayout();
             samTools.SuspendLayout();
@@ -50,7 +51,7 @@
             // samTools.ContentPanel
             // 
             samTools.ContentPanel.Controls.Add(dockPanelSAM);
-            samTools.ContentPanel.Size = new Size(1141, 667);
+            samTools.ContentPanel.Size = new Size(1141, 642);
             samTools.Dock = DockStyle.Fill;
             // 
             // samTools.LeftToolStripPanel
@@ -67,17 +68,17 @@
             dockPanelSAM.Dock = DockStyle.Fill;
             dockPanelSAM.Location = new Point(0, 0);
             dockPanelSAM.Name = "dockPanelSAM";
-            dockPanelSAM.Size = new Size(1141, 667);
+            dockPanelSAM.Size = new Size(1141, 642);
             dockPanelSAM.TabIndex = 0;
             // 
             // toolSAM
             // 
             toolSAM.Dock = DockStyle.None;
-            toolSAM.Items.AddRange(new ToolStripItem[] { samMenu, btnRecAudio });
+            toolSAM.Items.AddRange(new ToolStripItem[] { samMenu, btnRecAudio, btnOpenRecFolder });
             toolSAM.Location = new Point(0, 0);
             toolSAM.Name = "toolSAM";
             toolSAM.RenderMode = ToolStripRenderMode.Professional;
-            toolSAM.Size = new Size(38, 667);
+            toolSAM.Size = new Size(38, 642);
             toolSAM.Stretch = true;
             toolSAM.TabIndex = 0;
             // 
@@ -130,6 +131,16 @@
             btnRecAudio.Text = "Record audio";
             btnRecAudio.Click += btnRecAudio_Click;
             // 
+            // btnOpenRecFolder
+            // 
+            btnOpenRecFolder.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnOpenRecFolder.Image = Properties.Resources._2205218_folder_document_file_organize_icon;
+            btnOpenRecFolder.ImageTransparentColor = Color.Magenta;
+            btnOpenRecFolder.Name = "btnOpenRecFolder";
+            btnOpenRecFolder.Size = new Size(36, 20);
+            btnOpenRecFolder.Text = "Open rec folder";
+            btnOpenRecFolder.Click += btnOpenRecFolder_Click;
+            // 
             // SAM
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -161,5 +172,6 @@
         private ToolStripMenuItem loadSmartAgentToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripButton btnRecAudio;
+        private ToolStripButton btnOpenRecFolder;
     }
 }

@@ -5,6 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using NAudio.Wave;
 using NAudio.Lame;
+using System.Diagnostics;
 
 namespace sam
 {
@@ -214,6 +215,10 @@ namespace sam
             }
         }
 
-
+        private void btnOpenRecFolder_Click(object sender, EventArgs e)
+        {
+            var folder= Path.GetDirectoryName(Application.ExecutablePath) + "\\rec";
+            Process.Start("explorer.exe",folder);
+        }
     }
 }
