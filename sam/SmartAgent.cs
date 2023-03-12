@@ -21,62 +21,59 @@ namespace sam
         public bool bAssistantSpeaking { get; private set; }
 
         private List<InstalledVoice> _installedVoices;
+        // Construct a new SmartAgent instance with the specified AgentSettings and SAM objects
         public SmartAgent(AgentSettings? selectedAgentSettings = null, SAM sAM = null)
         {
             InitializeComponent();
             parentSAM = sAM;
-            if (selectedAgentSettings != null)
-            {
-                txtAgentPersonality.Text = selectedAgentSettings.AgentPersonality;
-                txtAgentName.Text = selectedAgentSettings.AgentName;
-                txtAgentID.Text = selectedAgentSettings.AgentID;
-                txtSlaveMessage.Text = selectedAgentSettings.SlaveAgentMessage;
-                List<string> systemPersonality = new List<string> { };
-
-                systemPersonality.Add(txtAgentPersonality.Text);
-
-                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
-
-                foreach (var chat in conversation.chatHistory)
-                {
-                    if (chat.Role == "user")
-                    {
-                        // Append the user's input to the chat with green text
-                        AppendTextToChatAsync(chat.Content, Color.Green);
-                    }
-                    else
-                    {
-                        // Append the gpt input to the chat with blue text
-                        AppendTextToChatAsync(chat.Content, Color.Blue);
-                    }
-                }
-            }
-            else
-            {
-                txtAgentPersonality.Text = SamUserSettings.Default.DefaultAgentPersonality;
-                txtAgentName.Text = GenerateRandomAgentName();
-                txtAgentID.Text = Guid.NewGuid().ToString();
-
-                // Create a new agent settings object
-                AgentSettings agentSettings = new AgentSettings
-                {
-                    AgentName = txtAgentName.Text,
-                    AgentID = txtAgentID.Text,
-                    AgentPersonality = txtAgentPersonality.Text,
-                    SlaveAgents = new List<AgentSettings> { },
-                    SlaveAgentMessage = txtSlaveMessage.Text
-
-                };
-                selectedAgentSettings = agentSettings;
-
-            }
-            this.currentAgentSettings = selectedAgentSettings;
+            LoadAgentSettings(selectedAgentSettings);
             LoadSlaveAgents();
+            LoadTTSVoices();
+        }
 
-            //Load voices
+        // Load the specified AgentSettings or generate a random one, populate the corresponding form fields,
+        // create a new Conversation object, and display the chat history in the chat window
+        private void LoadAgentSettings(AgentSettings? selectedAgentSettings)
+        {
+            if (selectedAgentSettings == null)
+            {
+                selectedAgentSettings = new AgentSettings
+                {
+                    AgentName = GenerateRandomAgentName(),
+                    AgentID = Guid.NewGuid().ToString(),
+                    AgentPersonality = SamUserSettings.Default.DefaultAgentPersonality,
+                    SlaveAgents = new List<AgentSettings>(),
+                    SlaveAgentMessage = txtSlaveMessage.Text
+                };
+            }
+
+            txtAgentPersonality.Text = selectedAgentSettings.AgentPersonality;
+            txtAgentName.Text = selectedAgentSettings.AgentName;
+            txtAgentID.Text = selectedAgentSettings.AgentID;
+            txtSlaveMessage.Text = selectedAgentSettings.SlaveAgentMessage;
+
+            // Create a new Conversation object with the specified API key, system personality, and agent ID
+            conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, new List<string> { txtAgentPersonality.Text }, txtAgentID.Text);
+
+            // Display the chat history in the chat window, with user input in green and GPT input in blue
+            foreach (var chat in conversation.chatHistory)
+            {
+                AppendTextToChatAsync(chat.Content, chat.Role == "user" ? Color.Green : Color.Blue);
+            }
+
+            this.currentAgentSettings = selectedAgentSettings;
+        }
+
+        // Load the available text-to-speech voices and populate the corresponding form fields
+        private void LoadTTSVoices()
+        {
+            // Create a new SpeechSynthesizer object
             using (SpeechSynthesizer synth = new SpeechSynthesizer())
             {
+                // Inject OneCore voices into the SpeechSynthesizer, if applicable
                 SpeechApiReflectionHelper.InjectOneCoreVoices(synth);
+
+                // Add each installed voice name to the dropdown menu and set the default selection
                 foreach (var voice in synth.GetInstalledVoices())
                 {
                     ttsVoice.Items.Add(voice.VoiceInfo.Name);
@@ -84,9 +81,6 @@ namespace sam
                     ttsSelectedVoice = voice.VoiceInfo.Name;
                 }
             }
-
-
-
         }
 
         private void LoadSlaveAgents()

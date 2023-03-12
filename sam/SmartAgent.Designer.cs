@@ -430,7 +430,7 @@
             grpUserInput.Controls.Add(pnlInput);
             grpUserInput.Location = new Point(3, 472);
             grpUserInput.Name = "grpUserInput";
-            grpUserInput.Size = new Size(668, 114);
+            grpUserInput.Size = new Size(662, 114);
             grpUserInput.TabIndex = 1;
             grpUserInput.TabStop = false;
             grpUserInput.Text = "User input";
@@ -443,13 +443,13 @@
             pnlInput.Dock = DockStyle.Fill;
             pnlInput.Location = new Point(3, 19);
             pnlInput.Name = "pnlInput";
-            pnlInput.Size = new Size(662, 92);
+            pnlInput.Size = new Size(656, 92);
             pnlInput.TabIndex = 0;
             // 
             // btnSend
             // 
             btnSend.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSend.Location = new Point(581, 3);
+            btnSend.Location = new Point(575, 3);
             btnSend.Name = "btnSend";
             btnSend.Size = new Size(78, 86);
             btnSend.TabIndex = 1;
@@ -466,7 +466,7 @@
             txtUserInput.Multiline = true;
             txtUserInput.Name = "txtUserInput";
             txtUserInput.ScrollBars = ScrollBars.Vertical;
-            txtUserInput.Size = new Size(572, 86);
+            txtUserInput.Size = new Size(566, 86);
             txtUserInput.TabIndex = 0;
             // 
             // agentStatus
