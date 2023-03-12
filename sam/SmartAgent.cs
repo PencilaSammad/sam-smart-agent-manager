@@ -31,6 +31,25 @@ namespace sam
                 txtAgentName.Text = selectedAgentSettings.AgentName;
                 txtAgentID.Text = selectedAgentSettings.AgentID;
                 txtSlaveMessage.Text = selectedAgentSettings.SlaveAgentMessage;
+                List<string> systemPersonality = new List<string> { };
+
+                systemPersonality.Add(txtAgentPersonality.Text);
+
+                conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
+
+                foreach (var chat in conversation.chatHistory)
+                {
+                    if (chat.Role == "user")
+                    {
+                        // Append the user's input to the chat with green text
+                        AppendTextToChatAsync(chat.Content, Color.Green);
+                    }
+                    else
+                    {
+                        // Append the gpt input to the chat with blue text
+                        AppendTextToChatAsync(chat.Content, Color.Blue);
+                    }
+                }
             }
             else
             {
@@ -49,6 +68,7 @@ namespace sam
 
                 };
                 selectedAgentSettings = agentSettings;
+                
             }
             this.currentAgentSettings = selectedAgentSettings;
             LoadSlaveAgents();
@@ -170,7 +190,7 @@ namespace sam
             {
                 if (SamUserSettings.Default.AZURE_API_KEY != "" && SamUserSettings.Default.AZURE_TTS_REGION != "" && SamUserSettings.Default.AZURE_TTS_VOICE != "")
                 {
-                    if (color == Color.Blue) 
+                    if (color == Color.Blue)
                     {
                         bAssistantSpeaking = true;
                         await SpeakAzureTextAsync(text);
@@ -210,25 +230,7 @@ namespace sam
                 systemPersonality.Add(txtAgentPersonality.Text);
 
                 conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
-                foreach (var chat in conversation.chatHistory)
-                {
-                    if (chat.Role == "user")
-                    {
-                        // Append the user's input to the chat with green text
-                        Invoke((Action)(() =>
-                        {
-                            AppendTextToChatAsync(chat.Content, Color.Green);
-                        }));
-                    }
-                    else
-                    {
-                        // Append the gpt input to the chat with blue text
-                        Invoke((Action)(() =>
-                        {
-                            AppendTextToChatAsync(chat.Content, Color.Blue);
-                        }));
-                    }
-                }
+                
                 if (txtUserInput.Text != "")
                 {
                     string userInput = txtUserInput.Text;

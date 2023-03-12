@@ -408,6 +408,7 @@
             txtCode.DefaultMarkerSize = 8;
             txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             txtCode.Dock = DockStyle.Fill;
+            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtCode.IsReplaceMode = false;
             txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
             txtCode.LeftBracket = '(';
@@ -498,7 +499,7 @@
             // 
             // agentTools
             // 
-            agentTools.Items.AddRange(new ToolStripItem[] { btnTTS, ttsVoice, toolStripButton1 });
+            agentTools.Items.AddRange(new ToolStripItem[] { btnTTS, toolStripButton1, ttsVoice });
             agentTools.Location = new Point(0, 0);
             agentTools.Name = "agentTools";
             agentTools.RenderMode = ToolStripRenderMode.Professional;
