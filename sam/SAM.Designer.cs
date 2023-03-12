@@ -39,7 +39,7 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             btnRecAudio = new ToolStripButton();
             samTools.ContentPanel.SuspendLayout();
-            samTools.TopToolStripPanel.SuspendLayout();
+            samTools.LeftToolStripPanel.SuspendLayout();
             samTools.SuspendLayout();
             toolSAM.SuspendLayout();
             SuspendLayout();
@@ -50,24 +50,24 @@
             // samTools.ContentPanel
             // 
             samTools.ContentPanel.Controls.Add(dockPanelSAM);
-            samTools.ContentPanel.Size = new Size(1179, 636);
+            samTools.ContentPanel.Size = new Size(1141, 667);
             samTools.Dock = DockStyle.Fill;
+            // 
+            // samTools.LeftToolStripPanel
+            // 
+            samTools.LeftToolStripPanel.Controls.Add(toolSAM);
             samTools.Location = new Point(0, 0);
             samTools.Name = "samTools";
             samTools.Size = new Size(1179, 667);
             samTools.TabIndex = 0;
             samTools.Text = "toolStripContainer1";
             // 
-            // samTools.TopToolStripPanel
-            // 
-            samTools.TopToolStripPanel.Controls.Add(toolSAM);
-            // 
             // dockPanelSAM
             // 
             dockPanelSAM.Dock = DockStyle.Fill;
             dockPanelSAM.Location = new Point(0, 0);
             dockPanelSAM.Name = "dockPanelSAM";
-            dockPanelSAM.Size = new Size(1179, 636);
+            dockPanelSAM.Size = new Size(1141, 667);
             dockPanelSAM.TabIndex = 0;
             // 
             // toolSAM
@@ -77,7 +77,7 @@
             toolSAM.Location = new Point(0, 0);
             toolSAM.Name = "toolSAM";
             toolSAM.RenderMode = ToolStripRenderMode.Professional;
-            toolSAM.Size = new Size(1179, 31);
+            toolSAM.Size = new Size(38, 667);
             toolSAM.Stretch = true;
             toolSAM.TabIndex = 0;
             // 
@@ -89,7 +89,7 @@
             samMenu.ImageScaling = ToolStripItemImageScaling.None;
             samMenu.ImageTransparentColor = Color.Magenta;
             samMenu.Name = "samMenu";
-            samMenu.Size = new Size(37, 28);
+            samMenu.Size = new Size(36, 28);
             samMenu.Text = "Menu";
             // 
             // newSmartAgentToolStripMenuItem
@@ -126,7 +126,7 @@
             btnRecAudio.Image = Properties.Resources.sharp_sensors_off_black_24dp;
             btnRecAudio.ImageTransparentColor = Color.Magenta;
             btnRecAudio.Name = "btnRecAudio";
-            btnRecAudio.Size = new Size(23, 28);
+            btnRecAudio.Size = new Size(36, 20);
             btnRecAudio.Text = "Record audio";
             btnRecAudio.Click += btnRecAudio_Click;
             // 
@@ -141,8 +141,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SAM - Smart Agent Manager";
             samTools.ContentPanel.ResumeLayout(false);
-            samTools.TopToolStripPanel.ResumeLayout(false);
-            samTools.TopToolStripPanel.PerformLayout();
+            samTools.LeftToolStripPanel.ResumeLayout(false);
+            samTools.LeftToolStripPanel.PerformLayout();
             samTools.ResumeLayout(false);
             samTools.PerformLayout();
             toolSAM.ResumeLayout(false);
