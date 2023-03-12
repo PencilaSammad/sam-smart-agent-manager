@@ -62,6 +62,7 @@ namespace sam
             }
 
             this.currentAgentSettings = selectedAgentSettings;
+
         }
 
         // Load the available text-to-speech voices and populate the corresponding form fields
@@ -523,6 +524,11 @@ namespace sam
                     await SendUserConversationMessageAsync();
                 }
             }
+        }
+
+        private void SmartAgent_Shown(object sender, EventArgs e)
+        {
+            txtUserInput.Focus();
         }
     }
 }

@@ -372,7 +372,7 @@
             tabPageCode.Padding = new Padding(3);
             tabPageCode.Size = new Size(651, 435);
             tabPageCode.TabIndex = 1;
-            tabPageCode.Text = "Code";
+            tabPageCode.Text = "C# Code";
             tabPageCode.UseVisualStyleBackColor = true;
             // 
             // groupBox4
@@ -550,6 +550,7 @@
             Text = "Smart Agent";
             FormClosing += SmartAgent_FormClosing;
             Load += SmartAgent_Load;
+            Shown += SmartAgent_Shown;
             agentContainer.Panel1.ResumeLayout(false);
             agentContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)agentContainer).EndInit();
