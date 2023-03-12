@@ -48,3 +48,23 @@ In practice, this means that users can speak their questions or responses to the
 
 Azure's voice chat capabilities with the SAM agent adds another level of interactivity and convenience for users who prefer to communicate via speech rather than typing.
 
+## Installation Guide for SAM - Smart Agent Manager
+To install SAM, follow the steps below:
+
+Option 1: Clone the repository and build the project
+
+1. Clone the SAM repository from GitHub using Git or GitHub Desktop.
+2. Open the solution file in Visual Studio 2022.
+3. Build the project to create an executable file.
+4. Launch SAM by running the executable file you built.
+
+Option 2: Use the standalone samsetup installer
+
+1. Download the samsetup.exe file from the SAM release page on GitHub.
+2. Double-click on the samsetup.exe file to begin the installation process.
+3. Follow the on-screen instructions to install SAM.
+4. Launch SAM by running the executable file installed by the samsetup installer.
+
+Once you have installed SAM, you can start creating agents, managing workflows, and optimizing routines. Remember to add your OpenAI API key and Azure Cognitive Speech Service API key and associate it with the region where it is located. 
+
+We hope this installation guide helps you get started with SAM. 
