@@ -511,17 +511,20 @@ namespace sam
             var tts = new AzureTextToSpeech(SamUserSettings.Default.AZURE_API_KEY, SamUserSettings.Default.AZURE_TTS_REGION, SamUserSettings.Default.AZURE_TTS_VOICE);
             while (micActive)
             {
-                while (bAssistantSpeaking) { Thread.Sleep(1000); }
-                var result = await tts.FromMicAsync();
-                Console.WriteLine($"RECOGNIZED: Text={result.Text}");
-                if (result.Text != "")
+                while (bAssistantSpeaking) { Thread.Sleep(1000);}
+                if (micActive)
                 {
-                    // Clear the user input field
-                    Invoke((Action)(() =>
+                    var result = await tts.FromMicAsync();
+                    Console.WriteLine($"RECOGNIZED: Text={result.Text}");
+                    if (result.Text != "")
                     {
-                        txtUserInput.Text = result.Text;
-                    }));
-                    await SendUserConversationMessageAsync();
+                        // Clear the user input field
+                        Invoke((Action)(() =>
+                        {
+                            txtUserInput.Text = result.Text;
+                        }));
+                        await SendUserConversationMessageAsync();
+                    }
                 }
             }
         }
