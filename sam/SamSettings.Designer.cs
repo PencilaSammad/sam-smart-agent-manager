@@ -39,14 +39,14 @@
             btnSaveAgent = new Button();
             btnReset = new Button();
             groupBox1 = new GroupBox();
+            cmbVoiceRecLang = new ComboBox();
+            label4 = new Label();
             cmbTTSVoice = new ComboBox();
             label3 = new Label();
             label2 = new Label();
             txtTTSregion = new TextBox();
             label1 = new Label();
             txtAzureAPI = new TextBox();
-            cmbVoiceRecLang = new ComboBox();
-            label4 = new Label();
             grpAPI.SuspendLayout();
             grpPersonality.SuspendLayout();
             grpAgentControl.SuspendLayout();
@@ -173,6 +173,25 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Azure settings";
             // 
+            // cmbVoiceRecLang
+            // 
+            cmbVoiceRecLang.FormattingEnabled = true;
+            cmbVoiceRecLang.Items.AddRange(new object[] { "fi-FI", "en-US" });
+            cmbVoiceRecLang.Location = new Point(3, 208);
+            cmbVoiceRecLang.Name = "cmbVoiceRecLang";
+            cmbVoiceRecLang.Size = new Size(385, 23);
+            cmbVoiceRecLang.TabIndex = 9;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(6, 190);
+            label4.Name = "label4";
+            label4.Size = new Size(152, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Voice recognition language";
+            // 
             // cmbTTSVoice
             // 
             cmbTTSVoice.FormattingEnabled = true;
@@ -226,25 +245,6 @@
             txtAzureAPI.PasswordChar = '*';
             txtAzureAPI.Size = new Size(385, 23);
             txtAzureAPI.TabIndex = 1;
-            // 
-            // cmbVoiceRecLang
-            // 
-            cmbVoiceRecLang.FormattingEnabled = true;
-            cmbVoiceRecLang.Items.AddRange(new object[] { "fi-FI", "en-US" });
-            cmbVoiceRecLang.Location = new Point(3, 208);
-            cmbVoiceRecLang.Name = "cmbVoiceRecLang";
-            cmbVoiceRecLang.Size = new Size(385, 23);
-            cmbVoiceRecLang.TabIndex = 9;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(6, 190);
-            label4.Name = "label4";
-            label4.Size = new Size(152, 15);
-            label4.TabIndex = 8;
-            label4.Text = "Voice recognition language";
             // 
             // SamSettings
             // 
