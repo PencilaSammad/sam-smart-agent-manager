@@ -68,8 +68,8 @@
             agentProgress = new ToolStripProgressBar();
             agentTools = new ToolStrip();
             btnTTS = new ToolStripButton();
-            ttsVoice = new ToolStripComboBox();
             toolStripButton1 = new ToolStripButton();
+            ttsVoice = new ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)agentContainer).BeginInit();
             agentContainer.Panel1.SuspendLayout();
             agentContainer.Panel2.SuspendLayout();
@@ -266,6 +266,7 @@
             txtAgentPersonality.Location = new Point(3, 19);
             txtAgentPersonality.Multiline = true;
             txtAgentPersonality.Name = "txtAgentPersonality";
+            txtAgentPersonality.ScrollBars = ScrollBars.Vertical;
             txtAgentPersonality.Size = new Size(337, 81);
             txtAgentPersonality.TabIndex = 1;
             // 
@@ -408,7 +409,6 @@
             txtCode.DefaultMarkerSize = 8;
             txtCode.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             txtCode.Dock = DockStyle.Fill;
-            txtCode.Font = new Font("Courier New", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             txtCode.IsReplaceMode = false;
             txtCode.Language = FastColoredTextBoxNS.Language.CSharp;
             txtCode.LeftBracket = '(';
@@ -430,7 +430,7 @@
             grpUserInput.Controls.Add(pnlInput);
             grpUserInput.Location = new Point(3, 472);
             grpUserInput.Name = "grpUserInput";
-            grpUserInput.Size = new Size(668, 111);
+            grpUserInput.Size = new Size(668, 114);
             grpUserInput.TabIndex = 1;
             grpUserInput.TabStop = false;
             grpUserInput.Text = "User input";
@@ -443,7 +443,7 @@
             pnlInput.Dock = DockStyle.Fill;
             pnlInput.Location = new Point(3, 19);
             pnlInput.Name = "pnlInput";
-            pnlInput.Size = new Size(662, 89);
+            pnlInput.Size = new Size(662, 92);
             pnlInput.TabIndex = 0;
             // 
             // btnSend
@@ -451,7 +451,7 @@
             btnSend.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSend.Location = new Point(581, 3);
             btnSend.Name = "btnSend";
-            btnSend.Size = new Size(78, 80);
+            btnSend.Size = new Size(78, 86);
             btnSend.TabIndex = 1;
             btnSend.Text = "Send";
             btnSend.UseVisualStyleBackColor = true;
@@ -465,7 +465,8 @@
             txtUserInput.Location = new Point(3, 3);
             txtUserInput.Multiline = true;
             txtUserInput.Name = "txtUserInput";
-            txtUserInput.Size = new Size(572, 80);
+            txtUserInput.ScrollBars = ScrollBars.Vertical;
+            txtUserInput.Size = new Size(572, 86);
             txtUserInput.TabIndex = 0;
             // 
             // agentStatus
@@ -518,13 +519,6 @@
             btnTTS.Text = "Text to speech";
             btnTTS.Click += btnTTS_Click;
             // 
-            // ttsVoice
-            // 
-            ttsVoice.DropDownWidth = 200;
-            ttsVoice.Name = "ttsVoice";
-            ttsVoice.Size = new Size(200, 25);
-            ttsVoice.TextChanged += ttsVoice_TextChanged;
-            // 
             // toolStripButton1
             // 
             toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -534,6 +528,13 @@
             toolStripButton1.Size = new Size(23, 22);
             toolStripButton1.Text = "Mic";
             toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // ttsVoice
+            // 
+            ttsVoice.DropDownWidth = 200;
+            ttsVoice.Name = "ttsVoice";
+            ttsVoice.Size = new Size(200, 25);
+            ttsVoice.TextChanged += ttsVoice_TextChanged;
             // 
             // SmartAgent
             // 

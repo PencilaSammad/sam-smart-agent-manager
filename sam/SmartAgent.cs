@@ -68,7 +68,7 @@ namespace sam
 
                 };
                 selectedAgentSettings = agentSettings;
-                
+
             }
             this.currentAgentSettings = selectedAgentSettings;
             LoadSlaveAgents();
@@ -230,7 +230,7 @@ namespace sam
                 systemPersonality.Add(txtAgentPersonality.Text);
 
                 conversation = new Conversation(SamUserSettings.Default.GPT_API_KEY, systemPersonality, txtAgentID.Text);
-                
+
                 if (txtUserInput.Text != "")
                 {
                     string userInput = txtUserInput.Text;
