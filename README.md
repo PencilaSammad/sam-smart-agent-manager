@@ -68,3 +68,12 @@ Option 2: Use the standalone samsetup installer
 Once you have installed SAM, you can start creating agents, managing workflows, and optimizing routines. Remember to add your OpenAI API key and Azure Cognitive Speech Service API key and associate it with the region where it is located. 
 
 We hope this installation guide helps you get started with SAM. 
+
+## Translator example
+![image](https://user-images.githubusercontent.com/167311/224570815-30b51c4a-abe5-4bc3-94a1-45be90a97f12.png)
+In this an example where I have configred the story teller agent to send the story to translator agents 
+
+
+
+
+
