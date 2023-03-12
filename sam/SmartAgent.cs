@@ -218,7 +218,7 @@ namespace sam
         private async Task SendUserConversationMessageAsync()
         {
             Invoke((Action)(() => { StartAnalysis(); }));
-            if (conversation == null)
+            if (conversation == null || this.currentAgentSettings.AgentPersonality != txtAgentPersonality.Text)
             {
                 List<string> systemPersonality = new List<string> { };
 
