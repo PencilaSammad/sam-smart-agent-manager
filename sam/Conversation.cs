@@ -74,59 +74,65 @@ namespace sam
         }
         public void ClearChatHistory()
         {
-            using (var connection = new SqliteConnection("Data Source=chat.db"))
+            if (File.Exists("chat.db"))
             {
-                connection.Open();
+                using (var connection = new SqliteConnection("Data Source=chat.db"))
+                {
+                    connection.Open();
 
-                var command = new SqliteCommand();
-                command.Connection = connection;
-                command.CommandText = "delete from ChatHistory where AgentId = @AgentId";
-                command.Parameters.AddWithValue("@AgentId", agentId);
-                command.ExecuteNonQuery();
+                    var command = new SqliteCommand();
+                    command.Connection = connection;
+                    command.CommandText = "delete from ChatHistory where AgentId = @AgentId";
+                    command.Parameters.AddWithValue("@AgentId", agentId);
+                    command.ExecuteNonQuery();
+                }
             }
-
             chatHistory.Clear();
         }
 
         public void SaveChatMessage(ChatMessage chatMessage)
         {
-            using (var connection = new SqliteConnection("Data Source=chat.db"))
+            if (File.Exists("chat.db"))
             {
-                connection.Open();
+                using (var connection = new SqliteConnection("Data Source=chat.db"))
+                {
+                    connection.Open();
 
-                var command = new SqliteCommand();
-                command.Connection = connection;
-                command.CommandText = "insert into ChatHistory(AgentId, Role, Content) values (@AgentId, @Role, @Content)";
-                command.Parameters.AddWithValue("@AgentId", agentId);
-                command.Parameters.AddWithValue("@Role", chatMessage.Role);
-                command.Parameters.AddWithValue("@Content", chatMessage.Content);
-                command.ExecuteNonQuery();
+                    var command = new SqliteCommand();
+                    command.Connection = connection;
+                    command.CommandText = "insert into ChatHistory(AgentId, Role, Content) values (@AgentId, @Role, @Content)";
+                    command.Parameters.AddWithValue("@AgentId", agentId);
+                    command.Parameters.AddWithValue("@Role", chatMessage.Role);
+                    command.Parameters.AddWithValue("@Content", chatMessage.Content);
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
         public List<ChatMessage> LoadChatHistory()
         {
 
-
-            using (var connection = new SqliteConnection("Data Source=chat.db"))
+            if (File.Exists("chat.db"))
             {
-                connection.Open();
-
-                var command = new SqliteCommand();
-                command.Connection = connection;
-                command.CommandText = "select Role, Content from ChatHistory where AgentId = @AgentId order by id";
-                command.Parameters.AddWithValue("@AgentId", agentId);
-
-                using (var reader = command.ExecuteReader())
+                using (var connection = new SqliteConnection("Data Source=chat.db"))
                 {
-                    while (reader.Read())
+                    connection.Open();
+
+                    var command = new SqliteCommand();
+                    command.Connection = connection;
+                    command.CommandText = "select Role, Content from ChatHistory where AgentId = @AgentId order by id";
+                    command.Parameters.AddWithValue("@AgentId", agentId);
+
+                    using (var reader = command.ExecuteReader())
                     {
-                        ChatMessage chatMessage = new ChatMessage((string)reader["Role"], (string)reader["Content"]);
-                        chatHistory.Add(chatMessage);
+                        while (reader.Read())
+                        {
+                            ChatMessage chatMessage = new ChatMessage((string)reader["Role"], (string)reader["Content"]);
+                            chatHistory.Add(chatMessage);
+                        }
                     }
                 }
             }
-
             return chatHistory;
         }
         // Method to start a conversation by taking a user's input and returning a response.
