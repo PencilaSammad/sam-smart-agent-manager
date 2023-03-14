@@ -2,15 +2,11 @@
 
 ## Our Pledge
 
-We as members, contributors, and leaders pledge to make participation in our
-community a harassment-free experience for everyone, regardless of age, body
-size, visible or invisible disability, ethnicity, sex characteristics, gender
-identity and expression, level of experience, education, socio-economic status,
-nationality, personal appearance, race, religion, or sexual identity
-and orientation.
+As members, contributors, and leaders of this community, we pledge to create and maintain a welcoming and inclusive environment for all participants. We are committed to ensuring that everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation, can engage in our community free from harassment or discrimination.
 
-We pledge to act and interact in ways that contribute to an open, welcoming,
-diverse, inclusive, and healthy community.
+We commit to treating all individuals with respect and kindness, and to valuing the diverse perspectives and backgrounds that make our community strong. We will actively work to foster a culture of inclusivity and belonging, and to address any instances of harassment or discrimination that may arise.
+
+By taking this pledge, we are committing ourselves to creating a safe, supportive, and inclusive space for all members of our community.
 
 ## Our Standards
 
